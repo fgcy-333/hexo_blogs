@@ -168,6 +168,11 @@ public class StringDemo1 {
         //运行的时候就报错，类型转换异常
         //java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
 //      String rs = (String) o;
+        
+        //这样是可以的 不同类型才会ClassCastException
+        Object a = "111";
+        String a1 = (String) a;
+        
         Object obj = "a";
         Integer r = obj instanceof Integer ? (Integer) obj : -1;
         System.out.println("String类与包装类强制类型转换：" + r);//-1
@@ -232,8 +237,10 @@ String类与包装类强制类型转换：-1
 ~~~
 *  /  %
 +  -
-如果两个整数做除法，其结果一定是整数，因为最高类型是整数。10/3=3  10*1.0/3=3.333335
+10/3=3  10*1.0/3=3.333335
 ~~~
+
+**如果两个整数做除法，其结果一定是整数，因为最高类型是整数**
 
 
 
@@ -243,29 +250,35 @@ String类与包装类强制类型转换：-1
     @Test
     public void testBasic() {
         int score = 123;
-        //取模运算符可以得到最尾端的数字
         System.out.println("个位：" + score % 10 + " 十位:" + score / 10 % 10 + " 百位" + score / 100);
     }
 ~~~
+
+**取模10可以得到最尾端的数字**
+
+
 
 
 
 ### 2.0 **+** 做连接符
 
 ~~~java
-能算则算，不能算就在一起。（计算机很聪明）
 int a = 5 ;
-System.out.println(“abc” + ‘a’); // abca   
+System.out.println("abc" + 'a'); // abca   
 System.out.println("abc" + a);  // abc5
 System.out.println(5 + a);   // 10
-System.out.println("abc" + 5 + ‘a’);//abc5a
+System.out.println("abc" + 5 + 'a');//abc5a
 System.out.println(15 + "abc" + 15);//15abc15
 System.out.println(a + 'a’);//102
 System.out.println(a + "" +'a’);//5a
-System.out.println(a + 'a'+" itheima ");//102itheima
+System.out.println(a + 'a'+" itheima ");//102itheima小写字符a是97
 System.out.println("itheima"+ a + 'a’);//itheima5a
 System.out.println("itheima"+ ( a + 'a' ));//itheima102
 ~~~
+
+**能算则算，不能算就在一起**
+
+
 
 
 
@@ -406,7 +419,7 @@ System.out.println("itheima"+ ( a + 'a' ));//itheima102
         int c = 120;
         int d = 5;
         int b = 78;
-        System.out.println(c > d ? (c > b ? c : b ):( d > b ? d : b));
+        System.out.println(c > d ? c > b ? c : b : d > b ? d : b);
     }
 ~~~
 
@@ -417,14 +430,6 @@ System.out.println("itheima"+ ( a + 'a' ));//itheima102
 
 
 ### 8.0运算符优先级
-
-----
-
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/Snipaste_2022-03-02_15-01-07.png)
-
----
-
-
 
 ~~~
 ()

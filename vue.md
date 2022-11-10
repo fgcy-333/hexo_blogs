@@ -12,7 +12,11 @@ index_img: https://picsum.photos/seed/52kogb/800/450
 
 # 第 1 章：Vue 核心
 
+~~~
 {% meting "5410361834" "netease" "playlist" "autoplay"  "mini:true" "order:random" %}
+~~~
+
+
 
 ## 1.1. Vue 简介 
 
@@ -27,7 +31,7 @@ index_img: https://picsum.photos/seed/52kogb/800/450
 
 ​		构建用户界面：将数据放到页面的合适位置
 
-​		渐进式 ：Vue可以自底向上逐层的应用 即：搭建简单应用时，只需一个轻量小巧的核心库。如果需要搭建更为复杂的应用，则可以通过引入各种各样的Vue插		件实现。
+​		渐进式 ：Vue可以自底向上逐层的应用 即：搭建简单应用时，只需一个轻量小巧的核心库。如果需要搭建更为复杂的应用，则可以通过引入各种各样的Vue插件实现。
 
 - 作者: 尤雨溪
 
@@ -39,7 +43,7 @@ index_img: https://picsum.photos/seed/52kogb/800/450
 
 ---
 
-> 先有Angla 再有Reac 再有Vue
+> 先有Angla 再有React 再有Vue
 
 
 
@@ -141,7 +145,6 @@ list.innerHTML =htmlStr;
 - ES6模块化
 - 包管理器
 - 原型、原型链
-- 原型链
 - 数组常用方法
 - axios
 
@@ -158,8 +161,8 @@ list.innerHTML =htmlStr;
 ### 1.1.5. Vue 周边库 
 
 1. vue-cli: vue 脚手架 
-2. vue-resource 
-3. axios
+2. vue-resource 请求
+3. axios 请求
 4. vue-router: 路由
 5. vuex: 状态管理 
 6. element-ui: 基于 vue 的 UI 组件库(PC 端) …
@@ -897,7 +900,7 @@ vue模板语法有2大类：
 
 ---
 
-修改vue实例中的之可以，动态修改容器中的值。
+修改vue实例中的值以，动态修改容器中的值。
 
 反之：修改容器中的值不会影响vue实例的值
 
@@ -1350,7 +1353,7 @@ MVVM模型
 
 - V:数据视图（View）：模板代码
 
-- VM：视图模型（ViewMode1）：Vue实例
+- VM：视图模型（ViewModel）：Vue实例
 
 观察发现：
 

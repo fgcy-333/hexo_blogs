@@ -7,7 +7,7 @@ tags:
 - 张天禹
 categories: 
 - 视频学习笔记
-index_img: https://picsum.photos/seed/52kogb/800/450
+index_img: /images/vue.png
 ---
 
 # 第 1 章：Vue 核心

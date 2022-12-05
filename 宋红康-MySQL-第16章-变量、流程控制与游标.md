@@ -5,6 +5,7 @@ tags:
 - 尚硅谷-宋红康-MySQL
 categories: 
 - 视频学习笔记
+index_img: /images/mysql.png
 ---
 
 # 第16章_变量、流程控制与游标

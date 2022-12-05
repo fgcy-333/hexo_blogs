@@ -5,6 +5,7 @@ tags:
 - 黑马程序员-dubbo
 categories: 
 - 视频学习笔记
+index_img: /images/dubbo.png
 ---
 
 高性能：提供快速的访问体验

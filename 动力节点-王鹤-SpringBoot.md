@@ -5,6 +5,7 @@ tags:
 - 动力节点-王鹤-SpringBoot
 categories: 
 - 视频学习笔记
+index_img: /images/springboot.png
 ---
 
 # 第一章  JavaConfig

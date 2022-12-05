@@ -5,6 +5,7 @@ tags:
 - 黑马程序员-JVM
 categories: 
 - 视频学习笔记
+index_img: /images/jvm.png
 ---
 
 

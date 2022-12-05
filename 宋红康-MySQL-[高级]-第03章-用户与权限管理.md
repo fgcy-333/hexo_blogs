@@ -5,6 +5,7 @@ tags:
 - 尚硅谷-宋红康-MySQL(高级)
 categories: 
 - 视频学习笔记
+index_img: /images/mysql.png
 ---
 
 # 1. 用户管理 

@@ -5,6 +5,7 @@ tags:
 - 动力节点-张啊荣-SpringMVC
 categories: 
 - 视频学习笔记
+index_img: /images/springmvc.png
 ---
 
 

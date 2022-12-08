@@ -5,6 +5,7 @@ tags:
 - 黑马程序员-徐磊-java基础
 categories: 
 - 视频学习笔记
+index_img: /images/java.png
 ---
 
 # 一、包

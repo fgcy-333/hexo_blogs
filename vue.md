@@ -7,7 +7,7 @@ tags:
 - 张天禹
 categories: 
 - 视频学习笔记
-index_img: https://picsum.photos/seed/52kogb/800/450
+index_img: /images/vue.png
 ---
 
 # 第 1 章：Vue 核心
@@ -13241,75 +13241,138 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
+# 第6章:vue-router
 
+## 理解
 
+1.vue-router 是 vue的一个插件库,专门用来实现SPA应用
 
+2.路由(route)就是 组key-value的对应关系
 
+3.多个路由,需要经过路由器(router)的管理
 
+4.key为路径, value 可能是function 或 component
 
+---
 
+![image-20221104214446123](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/202211042144377.png)
 
+---
 
 
 
 
 
+---
 
+![image-20221104215105623](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/202211042151103.png)
 
+----
 
 
 
+## 路由分类
 
+1.后端路由:
 
+1)理解: value 是function,用于处理客户端提交的请求
 
+2)工作过程:服务器接收到一个请求时,根据请求路径找到匹配的函数来处理请求,返回响应数据
 
 
 
+2.前端路由:
 
+1) 理解: value是component,用于展示页面内容
 
+2) 工作过程:当浏览器的路径改变时,对应的组件就会显示
 
 
 
 
 
+## 路由的作用：
 
+1.完成 SPA (single page web application)应用 **单页面应用**
 
+2.整个应用只有一个完整的页面
 
+3.点击页面中的导航链接不会刷新页面,只会做页面的局部更新。
 
+4.数据需要通过ajax请求获取。
 
 
 
 
 
+## 基本路由
 
 
 
 
 
+使用的是脚手架2的话，对应的vueRouter版本为2
 
+> npm i vue-router@3
 
 
 
+在main.js中
 
+~~~js
+import VueRouter from 'vue-router'
+//引入路由器
+import router from '../router/index.js'
 
 
+//应用插件
+Vue.use(VueRouter);
 
 
+new Vue(
+	el:'#root',
+    render:h=>h(App);
+	router//添加一个配置项
+);
+~~~
 
 
 
+router/index.js
 
+~~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../components/About'
+import Home from '../components/Home'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home
+        }
+    ]
+});
+~~~~
 
 
 
+看到：`/#/` 说明路由器已经在工作了
 
 
 
+使用标签 `<router-link to:'/about' active-class='active'>`代替a标签 实现 路由跳转  (active-class可配置高亮样式)
 
 
 
+使用` <router-vue></router-view>`指定路由组件呈现位置
 
 
 
@@ -13321,10 +13384,15 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
+## 几个注意点
 
+一般在文件夹`page`中 存放路由组件，在components文件夹中使用非路由组件
 
+不同组件中会有一个属性 `$route` 对应着该组件的路由规则
 
+不同组件中会有一个属性 `$router` 对应着全局的路由器 	 
 
+路由切换后, “隐藏” 了的路由组件,默认是被销毁掉的,需要的时候再去挂载
 
 
 
@@ -13332,62 +13400,242 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
+## 嵌套路由（多级路由）
 
+router/index.js
 
+配置路由规则,使用children配置项:
 
+~~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message
+                }
+            ]
+        }
+    ]
+});
+~~~~
 
+跳转(要写完整路径)
 
+`<router-link to='/home/news'>News</router-link>`
 
 
 
 
 
+## 路由传参
 
 
 
+跳转路由的按钮：
 
+### query传参 
 
 
 
+router/index.js
 
+~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail',
+                            component:Detail
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~
 
 
 
+~~~html
+<!--字符串写法 模板字符串-->
+<router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`"></router-link>
 
 
 
 
+<!--对象写法 -->
+<router-link :to="{
+                  path:'/home/message/detail'，
+                  query:{
+                  	  id:m.id,
+                  	  title:m.title
+                    }
+                  }">
+</router-link>
+~~~
 
+路由组件接收参数：
 
+Detail.vue
 
+~~~html
+<template>
+    <ul>
+        <li>id：{{$route.query.id}}</li>   
+        <li>title：{{$route.query.title}}</li>    
+    </ul>
+</template>
 
 
 
+<script>
+export default{
+    name:'Detail',
+    
+}
+</script>
+~~~
 
 
 
+### params参数
 
+router/index.js
 
+~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail/:id/:title',
+                            component:Detail
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~
 
 
 
+Detail.vue
 
+~~~html
+<template>
+    <ul>
+        <li>id：{{$route.params.id}}</li>   
+        <li>title：{{$route.params.title}}</li>    
+    </ul>
+</template>
 
 
 
+<script>
+export default{
+    name:'Detail',
+    
+}
+</script>
+~~~
 
 
 
+~~~html
+<!--字符串写法 模板字符串-->
+<router-link :to="`/home/message/detail/${m.id}/${m.title}`"></router-link>
 
 
 
 
+<!--对象写法 -->
+<!--params不能使用path只能使用name path:'/home/message/detail'，-->
+<router-link :to="{
+                 name:'xiangqing'
+                  query:{
+                  	  id:m.id,
+                  	  title:m.title
+                    }
+                  }">
+</router-link>
+~~~
 
+特别注意:路由携带params参数时,若使用to的 对象写法 ,则不能使用path配置项,必须使用name配置!
 
 
 
@@ -13395,70 +13643,329 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
+## 命名路由
 
+~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            name:'xiangqing'
+                            path:'detail',
+                            component:Detail
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~
 
 
 
+~~~html
+<!--简化前-->
+<router-link :to="{
+                  path:'/home/message/detail'，
+                  query:{
+                  	  id:m.id,
+                  	  title:m.title
+                    }
+                  }">
+</router-link>
 
+<!--简化后-->
+<router-link :to="{
+                  name:'xiangqing',
+                      query:{
+                          id:m.id,
+                          title:m.title
+                      }
+                  }">
+</router-link>
+~~~
 
 
 
 
 
+作用:可以简化路由的跳转(多级路由)
 
 
 
+## 路由的props配置
 
+### props的第一种写法
 
+值为对象，该对象中的所有key-value都会以props的形式传给Detail组件
 
+router/index.js
 
+~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail/:id/:title',
+                            component:Detail,
+                            props:{a:1,b:'hello'}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~
 
 
 
+Detail.vue
 
+~~~vue
+<template>
+    <ul>
+        <li>id：{{a}}</li>   
+        <li>title：{{b}}</li>    
+    </ul>
+</template>
 
 
 
+<script>
+export default{
+    name:'Detail',
+    props:['a','b']
+    
+}
+</script>
+~~~
 
+### props的第二种写法
 
+值为布尔值,若布尔值为真,就会把该路由组件收到的所有  **params参数**  ,以props的形式传给Detail组件。
 
 
 
+router/index.js
 
+~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail/:id/:title',
+                            component:Detail,
+                            props:true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~
 
 
 
+Detail.vue
 
+~~~vue
+<template>
+    <ul>
+        <li>id：{{id}}</li>   
+        <li>title：{{title}}</li>    
+    </ul>
+</template>
 
 
 
+<script>
+export default{
+    name:'Detail',
+    props:['id','title']
+    
+}
+</script>
+~~~
 
+> 只能是params传参
 
 
 
+### props的第三种写法
 
+值为函数
 
 
 
+router/index.js
 
+~~~~js
+import VueRouter from 'vue-router'
+//引入组件
+import About from '../pages/About'
+import Home from '../pages/Home'
+import News from '../pages/News'
+import Message from '../pages/Message'
+import Detail from '../pages/Detail'
 
 
+//创建并暴露一个路由器
+export default new VueRouter({
+    routes:[
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[
+                //子路由的路径不需要/
+                {
+                    path:'news',
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail/:id/:title',
+                            component:Detail,
+                            props($route){
+                                return {id:$route.query.id,title:$route.query.title}
+                            }
+                            
+                            <!--
+                            解构1
+                              props({query}){
+                                return {id:query.id,title:query.title}
+                            }
+                
+                
+                  			解构2
+                              props({query:{id,title}}){
+                                return {id:query.id,title:query.title}
+                            }
+                            -->
+                            
+                           
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+});
+~~~~
 
 
 
+Detail.vue
 
+~~~vue
+<template>
+    <ul>
+        <li>id：{{id}}</li>   
+        <li>title：{{title}}</li>    
+    </ul>
+</template>
 
 
 
+<script>
+export default{
+    name:'Detail',
+    props:['id','title']
+    
+}
+</script>
+~~~
 
 
 
+props作用:让路由组件更方便的收到参数
 
 
 
@@ -13466,8 +13973,19 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
+ ## `<router-link> `的replace属性
 
+作用:控制路由跳转时操作浏览器历史记录的模式
 
+浏览器的历史记录有两种写入方式:分别为push和replace,
+
+​	push是追加历史记录
+
+​	replace是替换当前记录
+
+​	路由跳转时候默认为push
+
+如何开启replace模式: `<router-link replace>News</router-link>`
 
 
 

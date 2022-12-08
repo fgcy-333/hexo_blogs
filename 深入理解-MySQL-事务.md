@@ -6,6 +6,7 @@ tags:
 - 事务
 categories: 
 - 博客学习笔记
+index_img: /images/mysql.png
 ---
 
 ## 什么是事务？

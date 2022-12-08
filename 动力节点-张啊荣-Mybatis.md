@@ -5,6 +5,7 @@ tags:
 - 动力节点-张啊荣-Mybatis
 categories: 
 - 视频学习笔记
+index_img: /images/mybatis.png
 ---
 
 # 一、框架概述

@@ -11,14 +11,6 @@ index_img: /images/springsecurity.png
 
 # SpringSecurity从入门到精通
 
-## 课程介绍
-
----
-
-![image-20211219121555979](http://img.fgcy.xyz/image-20211219121555979.png)
-
----
-
 
 
 ## 0.0 简介
@@ -125,7 +117,7 @@ public class HelloController {
 
 ---
 
-<img src="http://img.fgcy.xyz/image-20211215094003288.png" alt="image-20211215094003288" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100043238.png" alt="image-20211215094003288" style="zoom: 67%;" />
 
 ---
 
@@ -143,7 +135,7 @@ public class HelloController {
 
 ---
 
-![image-20211214144425527](http://img.fgcy.xyz/image-20211214144425527.png)
+![image-20211214144425527](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100043624.png)
 
 ---
 
@@ -163,7 +155,7 @@ public class HelloController {
 
 ---
 
-<img src="http://img.fgcy.xyz/image-20211214145824903-16553856711061.png" alt="image-20211214145824903" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100043139.png" alt="image-20211214145824903" style="zoom:67%;" />
 
 ---
 
@@ -177,7 +169,7 @@ public class HelloController {
 
 ---
 
-<img src="http://img.fgcy.xyz/image-20211214151515385.png" alt="image-20211214151515385" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100043405.png" alt="image-20211214151515385" style="zoom:80%;" />
 
 ---
 
@@ -1085,7 +1077,7 @@ public class LoginUser implements UserDetails {
 
 ---
 
-![image-20211216123945882](http://img.fgcy.xyz/image-20211216123945882.png)
+![image-20211216123945882](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100043581.png)
 
 ---
 
@@ -1119,6 +1111,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 ~~~~
+
+
+
+也可以指定PasswordEncoder
+
+~~~java
+@Configuration
+@EnableWebSecurity //@EnableWebSecurity是开启SpringSecurity的默认行为
+@EnableGlobalMethodSecurity(prePostEnabled = true)//开启注解功能，默认禁用注解
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {   
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 指定UserDetailService和加密器（比如MD5这种外部的）
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+}
+~~~
+
+
+
+
 
 
 
@@ -1507,7 +1520,7 @@ public class LoginUser implements UserDetails {
 
 ~~~~
 
-​		LoginUser修改完后我们就可以在UserDetailsServiceImpl中去把权限信息封装到LoginUser中了。我们写死权限进行测试，后面我们再从数据库中查询权限信息。
+LoginUser修改完后我们就可以在UserDetailsServiceImpl中去把权限信息封装到LoginUser中了。我们写死权限进行测试，后面我们再从数据库中查询权限信息。
 
 ~~~~java
 package com.sangeng.service.impl;
@@ -1564,7 +1577,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 ---
 
-​	<img src="http://img.fgcy.xyz/image-20211222110249727.png" alt="image-20211222110249727" style="zoom:80%;" />
+​	<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212100042999.png" alt="image-20211222110249727" style="zoom:80%;" />
 
 ---
 

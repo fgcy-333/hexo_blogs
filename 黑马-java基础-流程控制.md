@@ -77,9 +77,6 @@ public static void main(String[] args) {
             case SECOND:
                 System.out.println("2");
                 break;
-                break;
-                System.out.println("4");
-                break;
             case FIRST:
                 System.out.println("5");
                 break;
@@ -151,7 +148,53 @@ public static void main(String[] args) {
   6. 每一个名称都代表一个该枚举类的实例，且类型为常量
   7. 选择枚举类型作为信息的标志与分类比选择常量更为严谨
 
-  
+
+枚举实现状态码
+
+~~~java
+public enum Code {
+    SUCCESS(2000, "操作成功!"),
+
+    UPLOAD_FAIL(5000, "上传错误"),
+
+    DOWNLOAD_ERROR(5001, "下载出错"),
+
+    NO_PERMISSION(5002, "您没有权限执行该操作"),
+
+    DISABLE_DISK_FAIL(5003, "禁用用户出错"),
+
+    RENAME_ERR(5004, "重命名失败"),
+
+    NEW_FOLDER_FAIL(5005, "新建文件夹失败");
+
+
+    private final int code;
+    private final String msg;
+
+    Code(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+}
+~~~
+
+
+
+
+
+
+
+
+
+
 
 ### 2.0 if
 
@@ -244,6 +287,24 @@ for(初始语句;循环条件;迭代语句){
 371是水仙花
 111不是水仙花
 ~~~
+
+> 注意点：
+
+scan.nextLine()以回车符作为输入结束标志,读取方式是读取包括回车在内前面所有队列中的字符,向控制台返回时候,会自动舍弃回车符,将输入的各个字符组成字符串输出,同时队列将会清空包含回车符；
+
+scan.nextlnt()也是以回车符作为输入结束标志,读取方式是只读取回车符前面输入的所有内容,所以返回的时候它会将回车符前面内容返回并且清空回车符前的队列内容,将 **回车符留在队列中**
+
+----
+
+![image-20221110114802983](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/202211101148906.png)
+
+----
+
+
+
+
+
+
 
 
 

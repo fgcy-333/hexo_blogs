@@ -310,7 +310,6 @@ total 15021
 drwxr-xr-x 1 fgcy 197121       0 Jun 17 23:54  git总结.assets/
 -rw-r--r-- 1 fgcy 197121    8457 Jun 18 00:00  git总结.md
 -rw-r--r-- 1 fgcy 197121     162 Jun 17 23:03 '~$t&GitHub_.docx'
-
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 #当前目录
 ~~~
 
@@ -394,7 +393,9 @@ $ git config user.name swx
 
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
 $ git config user.email swx@learn_git.com
+~~~
 
+~~~shell
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
 $ cat .git/config
 [core]
@@ -420,33 +421,14 @@ git config --global user.name swx
 git config --global user.email swx@learn_git.com
 ~~~
 
+
+
 信息保存位置：~/.gitconfig  文件
-
-
 
 ~~~shell
 $ git config --global user.name fgcy
-fgcy@fgcy MINGW64 ~
 
-fgcy@fgcy MINGW64 ~
 $ git config --global user.email fgcy@2000.com
-
-fgcy@fgcy MINGW64 ~
-~~~
-
-
-
-~~~shell
-total 18371
-drwxr-xr-x 1 fgcy 197121       0 Jun 18 00:21 ./
-drwxr-xr-x 1 fgcy 197121       0 Mar 16 21:50 ../
--rw-r--r-- 1 fgcy 197121      96 Jun 18 00:21 .gitconfig
--rw-r--r-- 1 fgcy 197121       0 Jan 15 20:05 .mongorc.js
-drwxr-xr-x 1 fgcy 197121       0 Apr  1 00:01 .npminstall_tarball/
-drwxr-xr-x 1 fgcy 197121       0 May 27 10:43 .picgo/
-drwx
-(END)
-
 ~~~
 
 
@@ -470,7 +452,6 @@ $ cat .gitconfig
         email = fgcy@2000.com
 [credential "https://gitee.com"]
         provider = generic
-
 ~~~
 
 
@@ -673,6 +654,10 @@ this is the commit comment for commit the note_for_git.doc
 
 
 
+`ESC + : + W + Q` 退出vi编辑器，保存注释
+
+
+
 提交到版本库
 
 ~~~shell
@@ -718,7 +703,7 @@ Untracked files:
         Git&GitHub.pdf
         "git\346\200\273\347\273\223.assets/"
         "git\346\200\273\347\273\223.md"
-        ~$te_for_git.docx
+        ~$note_for_git.docx
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
@@ -897,7 +882,6 @@ $ git log --oneline
 $ git reflog
 6a297c1 (HEAD -> master) HEAD@{0}: commit: note_for_git.doc second commit
 959b098 HEAD@{1}: commit (initial): this is the commit comment for commit the note_for_git.doc
-
 ~~~
 
 HEAD@{移动到该版本需要多少步}
@@ -933,10 +917,19 @@ abfb1c4 HEAD@{1}: commit: fourth commit for note_for_git.doc
 68c5839 HEAD@{2}: commit: third commit for note_for_git.doc
 6a297c1 HEAD@{3}: commit: note_for_git.doc second commit
 959b098 HEAD@{4}: commit (initial): this is the commit comment for commit the note_for_git.doc
+~~~
 
+
+
+
+~~~shell
 $ git reset --hard 959b098
 HEAD is now at 959b098 this is the commit comment for commit the note_for_git.doc
+~~~
 
+
+
+~~~shell
 $ git reflog
 959b098 (HEAD -> master) HEAD@{0}: reset: moving to 959b098
 b2c89a7 HEAD@{1}: commit: fifth commit for note_for_git.doc
@@ -944,7 +937,6 @@ abfb1c4 HEAD@{2}: commit: fourth commit for note_for_git.doc
 68c5839 HEAD@{3}: commit: third commit for note_for_git.doc
 6a297c1 HEAD@{4}: commit: note_for_git.doc second commit
 959b098 (HEAD -> master) HEAD@{5}: commit (initial): this is the commit comment for commit the note_for_git.doc
-
 ~~~
 
 
@@ -966,8 +958,9 @@ abfb1c4 fourth commit for note_for_git.doc
 68c5839 third commit for note_for_git.doc
 6a297c1 note_for_git.doc second commit
 959b098 this is the commit comment for commit the note_for_git.doc
-
 ~~~
+
+
 
 ~~~shell
 $ git reset --hard HEAD^
@@ -979,7 +972,6 @@ abfb1c4 (HEAD -> master) fourth commit for note_for_git.doc
 68c5839 third commit for note_for_git.doc
 6a297c1 note_for_git.doc second commit
 959b098 this is the commit comment for commit the note_for_git.doc
-
 ~~~
 
 
@@ -992,7 +984,6 @@ fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
 $ git log --oneline
 6a297c1 (HEAD -> master) note_for_git.doc second commit
 959b098 this is the commit comment for commit the note_for_git.doc
-
 ~~~
 
 注：一个^表示后退一步，n 个表示后退 n 步
@@ -1014,7 +1005,6 @@ HEAD is now at 959b098 this is the commit comment for commit the note_for_git.do
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
 $ git log --oneline
 959b098 (HEAD -> master) this is the commit comment for commit the note_for_git.doc
-
 ~~~
 
 
@@ -1223,11 +1213,12 @@ abfb1c4 HEAD@{12}: commit: fourth commit for note_for_git.doc
 68c5839 HEAD@{13}: commit: third commit for note_for_git.doc
 6a297c1 HEAD@{14}: commit: note_for_git.doc second commit
 959b098 HEAD@{15}: commit (initial): this is the commit comment for commit the note_for_git.doc
+~~~
 
+~~~shell
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
 $ git reset --hard 1beefc9
 HEAD is now at 1beefc9 new aaa.text
-
 ~~~
 
 
@@ -1297,8 +1288,6 @@ index a5d954f..6ba728d 100644
 
 ~~~
 
----
-
 
 
 >  git diff [本地库中历史版本] [文件名]
@@ -1325,12 +1314,6 @@ index 0000000..6ba728d
 +ffffffffffffffffff
 
 ~~~
-
-
-
-
-
-
 
 
 
@@ -1414,7 +1397,6 @@ index 0000000..6ba728d
 ~~~shell
 $ git branch -v
 * master 1beefc9 new aaa.text    #只有一个分支，且正处于该分支上
-
 ~~~
 
 
@@ -1449,7 +1431,6 @@ fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (hot_fix)
 $ git branch -v
 * hot_fix 1beefc9 new aaa.text						#有两个分支，且正处于hot_fix分支上
   master  1beefc9 new aaa.text
-
 ~~~
 
 
@@ -1479,7 +1460,7 @@ $ git branch -v
 
 ~~~
 
-5、切换到主分支上，既是接收修改的分支
+5、切换到主分支上，即是接收修改的分支
 
 
 
@@ -1494,7 +1475,6 @@ Fast-forward
  create mode 100644 apple.txt
 
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master)
-
 ~~~
 
 7、查看新文件
@@ -1531,7 +1511,6 @@ Auto-merging aaa.txt
 CONFLICT (content): Merge conflict in aaa.txt
 Automatic merge failed; fix conflicts and then commit the result.
 fgcy@fgcy MINGW64 /d/learn/尚硅谷/Git&github学习资料 (master|MERGING)
-
 ~~~
 
 
@@ -3468,4 +3447,46 @@ tip：
 
 只要 GitLab 的远程库连接定义好以后，对 GitLab 远程库进行 pull 和 clone 的操作和
 Github 和码云一致，此处不再赘述
+
+
+
+
+
+
+
+# 问题
+
+## Failed to connect to github.com port 443: Timed out
+
+
+
+触发：
+
+~~~
+$ git pull origin master
+fatal: unable to access 'https://github.com/fgcy-333/hexo_blogs.git/': Failed to connect to github.com port 443 after 21102 ms: Timed out
+~~~
+
+描述：可以登录外网，就是推送和拉取代码时超时
+
+
+
+解决方案：
+
+
+
+----
+
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/202212070919465.png" alt="image-20221207091904254" style="zoom: 50%;" />
+
+----
+
+
+
+
+
+~~~
+git config --global http.proxy 127.0.0.1:10810 为全局的 git 项目都设置代理
+git config --local http.proxy 127.0.0.1:10810 为某个 git 项目单独设置代理
+~~~
 

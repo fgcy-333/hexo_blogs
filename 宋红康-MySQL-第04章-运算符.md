@@ -12,8 +12,6 @@ index_img: /images/mysql.png
 
 
 
-***
-
 ## 1. 算术运算符
 
 算术运算符主要用于数学运算，其可以连接运算符前后的两个数值或表达式
@@ -24,7 +22,7 @@ index_img: /images/mysql.png
 
 ----
 
-![image-20211012100749193](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012100749193.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012100749193.png" alt="image-20211012100749193" style="zoom: 67%;" />
 
 ---
 
@@ -56,7 +54,9 @@ FROM dual;
 >
 > - 在Java中，+的左右两边如果有字符串，那么表示字符串的拼接。但是在MySQL中 + 只表示数值相加。
 >
->   如果遇到非数值类型，先尝试转成数值，如果转失败，就按0计算。（补充：MySQL中字符串拼接要使用字符串函数CONCAT()实现）
+>   如果遇到非数值类型，先尝试转成数值，如果转失败，就按0计算。
+>   
+>   （补充：MySQL中字符串拼接要使用字符串函数CONCAT()实现）
 
 
 
@@ -66,7 +66,7 @@ FROM dual;
 
 注意点：
 
-1、在SQL中，+没有连接的作用，就表示加法运算。此时，会将字符串转换为数值**（隐式转换）**【数字字符串转为对应数字，字符字符串转为0】
+1、在SQL中，` +` 没有连接的作用，就表示加法运算。此时，会将字符串转换为数值**（隐式转换）**【数字字符串转为对应数字，字符字符串转为0】
 
 2、即字符与数字参与运算，先将字符转为数字，能转数字就转数字，不能就转0
 
@@ -80,10 +80,6 @@ FROM DUAL; #伪表
 |       101 |
 +-----------+
 ~~~
-
-
-
----
 
 
 
@@ -159,9 +155,9 @@ FROM employees;
 
 由运算结果可以得出如下结论：
 
-> - 一个数乘以整数1和除以整数1后仍得原数
-> - 一个数乘以浮点数1和除以浮点数1后变成浮点数，数值与原数相等
+> - 一个数乘以整数1得原数
 > - 一个数除以整数后，不管是否能除尽，结果都为一个浮点数
+> - 一个数乘以浮点数1和除以浮点数1后变成浮点数，数值与原数相等
 > - 一个数除以另一个数，除不尽时，结果为一个浮点数，并保留到小数点后4位
 > - 乘法和除法的优先级相同，进行先乘后除操作与先除后乘操作，得出的结果相同
 > - 在数学运算中，0不能用作除数，在MySQL中，一个数除以0为NULL
@@ -219,9 +215,9 @@ WHERE employee_id MOD 2 = 0;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012101110021.png" alt="image-20211012101110021" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012101110021.png" alt="image-20211012101110021" style="zoom:67%;" />
 
-![image-20211012104955094](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012104955094.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012104955094.png" alt="image-20211012104955094" style="zoom:50%;" />
 
 ---
 
@@ -229,14 +225,14 @@ WHERE employee_id MOD 2 = 0;
 
 **1．等号运算符**
 
-- 等号运算符（=）判断等号两边的值、字符串或表达式是否相等，如果相等则返回1，不相等则返回0。
+- 等号运算符（=）判断等号两边的值、字符串或表达式 **是否相等**，如果相等则返回1，不相等则返回0。
 - 在使用等号运算符时，遵循如下规则：
   - 如果等号	**两边的值**	、字符串或表达式	**都为字符串**，则MySQL会按照字符串进行比较，其比较的是 **每个字符串中字符的ANSI编码是否相等** 。
   - **如果等号两边的值都是整数，则MySQL会按照整数来    **比较两个值的大小。
   - 如果等号两边的值一个是整数，另一个是字符串，则MySQL会将   **字符串转化为数字** (隐式转换) 进行比较。
   - 如果等号两边的值、字符串或表达式中  **有一个为NULL**，则**比较结果为NULL**。
   
-- 对比：SQL中赋值符号使用   `    = `
+- 对比：SQL中赋值符号使用   `    = `   比较符号也是用 `=`
 
 
 
@@ -312,7 +308,6 @@ FROM DUAL;
 ```mysql
 #查询salary=10000，注意在Java中基本数据类型的比较是= =
 SELECT employee_id,salary FROM employees WHERE salary = 10000;
-mysql> SELECT employee_id,salary FROM employees WHERE salary = 10000;
 
 +-------------+----------+
 | employee_id | salary   |
@@ -332,8 +327,9 @@ mysql> SELECT employee_id,salary FROM employees WHERE salary = 10000;
 # null作为过滤条件，相当于没有过滤
 SELECT last_name,salary,commission_pct
 FROM employees
--- where salary = 6000;
 WHERE commission_pct = NULL;  #此时执行，不会有任何的结果【只有当过滤条件为真1时，才会取出这条记录；左右两边有一边为null则结果为null】
+
+Empty set (0.01 sec)
 ~~~
 
 
@@ -345,7 +341,7 @@ WHERE commission_pct = NULL;  #此时执行，不会有任何的结果【只有�
 
 
 **2．安全等于运算符**
-安全等于运算符（`<=>`）与等于运算符（=）的作用是相似的，`唯一的区别`是    `‘<=>’`  可以用来**对NULL进行判断**
+安全等于运算符（`<=>`）与等于运算符（=）的作用是相似的，`唯一的区别`是    `<=>`  可以用来**对NULL进行判断**
 
 在两个操作数均为NULL时，其   **返回值为1**  ，而不为NULL
 
@@ -355,8 +351,6 @@ WHERE commission_pct = NULL;  #此时执行，不会有任何的结果【只有�
 
 ~~~mysql
 -- <=> ：安全等于。 记忆技巧：为NULL而生，与null进行比较结果不再只是null
-
-
 SELECT 1 <=> 2,1 <=> '1',1 <=> 'a',0 <=> 'a'
 FROM DUAL;
 
@@ -387,10 +381,6 @@ WHERE commission_pct <=> 0.40;
 
 #如果把0.40改成 NULL 呢？
 # 只有当过滤条件为真1时，才会取出这条记录,其他null，0都不会取出
-
-
-
-
 #练习：查询表中commission_pct为null的数据有哪些
 SELECT last_name,salary,commission_pct
 FROM employees
@@ -413,7 +403,7 @@ WHERE commission_pct <=> NULL;
 
 
 **3．不等于运算符**
-不等于运算符（<>和!=）用于判断两边的数字、字符串或者表达式的值是否不相等，如果不相等则返回1，相等则返回0。
+不等于运算符（ `<>` 和  `!=` ）用于判断两边的数字、字符串或者表达式的值是否不相等，如果不相等则返回1，相等则返回0。
 
 **不等于运算符不能判断NULL值**。如果两边的值有任意一个为NULL，或两边都为NULL，则结果为NULL
 
@@ -447,9 +437,9 @@ mysql> SELECT 1 <> 1, 1 != 2, 'a' != 'b', (3+4) <> (2+6), 'a' != NULL, NULL <> N
 
 ---
 
-![image-20211012105303219](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105303219-16558596435351.png)![image-20211012105030527](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105030527.png)
+![image-20211012105303219](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105303219-16558596435351.png)<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105030527.png" alt="image-20211012105030527" style="zoom:50%;" />
 
-![image-20211012105052456](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105052456.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012105052456.png" alt="image-20211012105052456" style="zoom:50%;" />
 
 ---
 
@@ -484,10 +474,6 @@ mysql> SELECT NULL IS NULL, ISNULL(NULL), ISNULL('a'), 1 IS NULL;
 
 
 
----
-
-
-
 ```mysql
 #查询commission_pct等于NULL。比较如下的四种写法
 SELECT employee_id,commission_pct FROM employees
@@ -503,7 +489,7 @@ WHERE ISNULL(commission_pct); #结果为0 1
 
 
 SELECT employee_id,commission_pct FROM employees 
-WHERE commission_pct = NULL; #与NULL作运算，结果永远为null 没有看到1就不会出结果，所以不会有结果
+WHERE commission_pct = NULL; #与NULL作运算，结果永远为null 没有看到1就不会要这条记录，所以不会有结果
 ```
 
 ```mysql
@@ -566,10 +552,6 @@ mysql> SELECT NULL IS NOT NULL, 'a' IS NOT NULL,  1 IS NOT NULL;
 1 row in set (0.01 sec)
 ```
 
----
-
-
-
 
 
 ```mysql
@@ -578,10 +560,6 @@ SELECT employee_id,commission_pct FROM employees WHERE commission_pct IS NOT NUL
 SELECT employee_id,commission_pct FROM employees WHERE NOT commission_pct <=> NULL;
 SELECT employee_id,commission_pct FROM employees WHERE NOT ISNULL(commission_pct);
 ```
-
-
-
-----
 
 
 
@@ -641,8 +619,6 @@ SELECT LEAST(first_name,last_name) a,LEAST(LENGTH(first_name),LENGTH(last_name))
 +-------------+------+-------------+-------------+--------------------+
 ~~~
 
-
-
 由结果可以看到，当参数是整数或者浮点数时，LEAST将返回其中最小的值；当参数为字符串时，返回字母表中顺序最靠前的字符；当比较值列表中有NULL时，不能判断大小，返回值为NULL。
 
 
@@ -694,8 +670,6 @@ mysql> SELECT 1 BETWEEN 0 AND 1, 10 BETWEEN 11 AND 12, 'b' BETWEEN 'a' AND 'c';
 ```
 
 
-
----
 
 
 
@@ -762,9 +736,9 @@ IN运算符用于判断	**给定的值**	是否是	**IN列表中的一个值**�
 如果给定的值为NULL，或者IN列表中存在NULL，则结果为NULL。【除了安全等于 和 IS NULL相关的关键字函数外，有NULL参与运算，结果为NULL】
 
 ```mysql
-mysql> SELECT 'a' IN ('a','b','c'), 1 IN (2,3), NULL IN ('a','b'), 'a' IN ('a', NULL);
+SELECT 'a' IN ('a','b','c'), 1 IN (2,3), NULL IN ('a','b'), 'a' IN (NULL,'a');
 +----------------------+------------+-------------------+--------------------+
-| 'a' IN ('a','b','c') | 1 IN (2,3) | NULL IN ('a','b') | 'a' IN ('a', NULL) |
+| 'a' IN ('a','b','c') | 1 IN (2,3) | NULL IN ('a','b') | 'a' IN (NULL,'a') |
 +----------------------+------------+-------------------+--------------------+
 |            1         |        0   |         NULL      |         1          |
 +----------------------+------------+-------------------+--------------------+
@@ -772,10 +746,6 @@ mysql> SELECT 'a' IN ('a','b','c'), 1 IN (2,3), NULL IN ('a','b'), 'a' IN ('a', 
 ```
 
 
-
-
-
----
 
 
 
@@ -847,8 +817,6 @@ LIKE运算符主要用来匹配字符串，通常用于模糊匹配，如果满�
 
 **如果给定的值或者匹配条件为NULL**，则返回**结果为NULL**。
 
-
-
 LIKE运算符通常使用如下通配符：
 
 ```mysql
@@ -856,15 +824,10 @@ LIKE运算符通常使用如下通配符：
 “_”：只能匹配一个字符。
 ```
 
-
-
-
-
 SQL语句示例如下：
 
 ```mysql
 mysql> SELECT NULL LIKE 'abc', 'abc' LIKE NULL;  
-
 
 +-----------------+-----------------+
 | NULL LIKE 'abc' | 'abc' LIKE NULL |
@@ -949,7 +912,7 @@ WHERE last_name LIKE '__a%';
 
 
 
-**ESCAPE**【转移符号】
+**ESCAPE**【转义符号】
 
 - 回避特殊符号的：**使用转义符**
 
@@ -963,17 +926,25 @@ SELECT last_name
 FROM employees
 WHERE last_name LIKE '_\_a%';
 
++-----------+
+| last_name |
++-----------+
+| a_a       |
+| a_a       |
++-----------+
+2 rows in set (0.00 sec)
+```
 
 
 
-
+~~~sql
 #或者  (了解)【定义$作为转义标识】
 SELECT last_name
 FROM employees
 WHERE last_name LIKE '_$_a%' ESCAPE '$';
 
 Empty set (0.00 sec)
-```
+~~~
 
 
 
@@ -996,13 +967,13 @@ REGEXP运算符在进行匹配时，常用的有下面几种通配符：
 
 ​			可以指定命名字符的范围，使用一个  `‘-'`。“[a-z]”匹配任何字母，而“[0-9]”匹配任何数字。
 
-（5）`‘*’`匹配零个或多个在它前面的字符。例如，“x*”匹配任何数量的‘x’字符，“[0-9]*”匹配任何数量的数字，而“*”匹配任何数量的任何字符。
+（5）`‘*’`匹配零个或多个在它前面的字符。例如，“x”匹配一个 ‘x’ 字符，“[0-9]”一个数字，而 “*” 匹配任何数量。
 
 
 
 SQL语句示例如下：
 
-```mysql
+~~~sql
 -- 以shk开头，以t结尾，包含hk
 SELECT 'shkstart' REGEXP '^shk', 'shkstart' REGEXP 't$', 'shkstart' REGEXP 'hk'
 FROM DUAL;
@@ -1012,11 +983,11 @@ FROM DUAL;
 +--------------------------+------------------------+------------------------+
 |                        1 |                      1 |                      1 |
 +--------------------------+------------------------+------------------------+
+~~~
 
 
 
-
-
+```mysql
 -- 通配符 . 代表除换行符之外的全部字符
 SELECT 'atguigu' REGEXP 'gu.gu','atguigu' REGEXP '[ab]'
 FROM DUAL;
@@ -1042,7 +1013,7 @@ MySQL中支持4种逻辑运算符如下：
 
 ---
 
-![image-20211012110241418](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110241418.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110241418.png" alt="image-20211012110241418" style="zoom: 50%;" />
 
 ---
 
@@ -1066,6 +1037,64 @@ mysql> SELECT NOT 1, NOT 0, NOT(1+1), NOT !1, NOT NULL;
 SELECT last_name, job_id
 FROM   employees
 WHERE  job_id NOT IN ('IT_PROG', 'ST_CLERK', 'SA_REP');
+
++------------+------------+
+| last_name  | job_id     |
++------------+------------+
+| King       | AD_PRES    |
+| Kochhar    | AD_VP      |
+| De Haan    | AD_VP      |
+| Greenberg  | FI_MGR     |
+| Faviet     | FI_ACCOUNT |
+| Chen       | FI_ACCOUNT |
+| Sciarra    | FI_ACCOUNT |
+| Urman      | FI_ACCOUNT |
+| Popp       | FI_ACCOUNT |
+| Raphaely   | PU_MAN     |
+| Khoo       | PU_CLERK   |
+| Baida      | PU_CLERK   |
+| Tobias     | PU_CLERK   |
+| Himuro     | PU_CLERK   |
+| Colmenares | PU_CLERK   |
+| Weiss      | ST_MAN     |
+| Fripp      | ST_MAN     |
+| Kaufling   | ST_MAN     |
+| Vollman    | ST_MAN     |
+| Mourgos    | ST_MAN     |
+| Russell    | SA_MAN     |
+| Partners   | SA_MAN     |
+| Errazuriz  | SA_MAN     |
+| Cambrault  | SA_MAN     |
+| Zlotkey    | SA_MAN     |
+| Taylor     | SH_CLERK   |
+| Fleaur     | SH_CLERK   |
+| Sullivan   | SH_CLERK   |
+| Geoni      | SH_CLERK   |
+| Sarchand   | SH_CLERK   |
+| Bull       | SH_CLERK   |
+| Dellinger  | SH_CLERK   |
+| Cabrio     | SH_CLERK   |
+| Chung      | SH_CLERK   |
+| Dilly      | SH_CLERK   |
+| Gates      | SH_CLERK   |
+| Perkins    | SH_CLERK   |
+| Bell       | SH_CLERK   |
+| Everett    | SH_CLERK   |
+| McCain     | SH_CLERK   |
+| Jones      | SH_CLERK   |
+| Walsh      | SH_CLERK   |
+| Feeney     | SH_CLERK   |
+| OConnell   | SH_CLERK   |
+| Grant      | SH_CLERK   |
+| Whalen     | AD_ASST    |
+| Hartstein  | MK_MAN     |
+| Fay        | MK_REP     |
+| Mavris     | HR_REP     |
+| Baer       | PR_REP     |
+| Higgins    | AC_MGR     |
+| Gietz      | AC_ACCOUNT |
++------------+------------+
+52 rows in set (0.00 sec)
 ```
 
 
@@ -1148,10 +1177,6 @@ mysql> SELECT 1 AND -1, 0 AND 1, 0 AND NULL, 1 AND NULL;
 ```
 
 
-
-
-
----
 
 
 
@@ -1314,10 +1339,6 @@ WHERE salary NOT BETWEEN 9000 AND 12000;
 
 
 
-----
-
-
-
 ```mysql
 # 工资大于一万或者职位包含MAN的员工信息
 SELECT employee_id, last_name, job_id, salary
@@ -1382,7 +1403,7 @@ mysql> SELECT 1 XOR -1, 1 XOR 0, 0 XOR 0, 1 XOR NULL, 1 XOR 1 XOR 1, 0 XOR 0 XOR
 +----------+---------+---------+------------+---------------+---------------+
 1 row in set (0.00 sec)
 
-# 本身与本身的相反数做异或，会返回零
+# 只能是1 和 0 玩
 ```
 
 
@@ -1424,7 +1445,7 @@ MySQL支持的位运算符如下：
 
 ---
 
-![image-20211012110511223](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110511223.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110511223.png" alt="image-20211012110511223" style="zoom:50%;" />
 
 ---
 
@@ -1519,7 +1540,7 @@ mysql> SELECT 12 & 5, 12 | 5,12 ^ 5 FROM DUAL;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211023115738415.png" alt="image-20211023115738415" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211023115738415.png" alt="image-20211023115738415" style="zoom: 50%;" />
 
 ---
 
@@ -1604,11 +1625,9 @@ mysql> SELECT 1 << 2, 4 << 2;
 
 ---
 
-![image-20211012111042395](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012111042395-16558626753503.png)![image-20211012110731059](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110731059.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012111042395-16558626753503.png" alt="image-20211012111042395" style="zoom:50%;" /><img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110731059.png" alt="image-20211012110731059" style="zoom:50%;" />
 
 ---
-
-
 
 数字编号越大，优先级越高，优先级高的运算符先进行计算。可以看到，赋值运算符的优先级最低，使用“()”括起来的表达式的优先级最高
 
@@ -1622,7 +1641,7 @@ MySQL中使用REGEXP关键字指定正则表达式的字符匹配模式。下表
 
 ---
 
-![image-20220821203018273](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220821203018273.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220821203018273.png" alt="image-20220821203018273" style="zoom:50%;" />
 
 ---
 
@@ -1983,3 +2002,96 @@ WHERE manager_id IN (100,101,110);
 19 rows in set (0.00 sec)
 ~~~
 
+
+
+# 小结
+
+AND的优先级高于OR
+
+一个整数类型的值对整数进行加法和减法操作，结果还是一个整数；
+
+一个整数类型的值对浮点数进行加法和减法操作，结果是一个浮点数；
+
+在Java中，`+` 的左右两边如果有字符串，那么表示字符串的拼接。但是在MySQL中 `+ `只表示数值相加。如果遇到非数值类型，先尝试转成数值，如果转失败，就按0计算。（补充：MySQL中字符串拼接要使用字符串函数CONCAT()实现）
+
+在数学运算中，0不能用作除数，在MySQL中，一个数除以0为NULL
+
+SQL中只要涉及除法运算，结果都是浮点数
+
+即字符与数字参与运算，先将字符转为数字，能转数字就转数字，不能就转0
+
+MySQL中字符串拼接要使用字符串函数CONCAT()实现
+
+取模结果，与被模数有关，与模数无关
+
+比较运算符 比较的结果为 **真则返回1**，**比较的结果为  假则返回0**，其他情况则返回**NULL**
+
+SQL中赋值符号使用   `    = `   比较符号也是用 `=`
+
+  `<=>`  可以用来**对NULL进行判断**在两个操作数均为NULL时，其   **返回值为1**  ，而不为NULL   当一个操作数为NULL时，其   **返回值为0**  ，而不为NULL
+
+~~~
+字段 IS NOT NULL
+
+NOT 字段 <=>NULL
+
+NOT ISNULL(字段)
+~~~
+
+LEAST（）取集合中的最小
+GREATEST（）取集合中的最大
+
+~~~~sql
+SELECT 'a' IN ('a','b','c'), 1 IN (2,3), NULL IN ('a','b'), 'a' IN (NULL,'a');
++----------------------+------------+-------------------+--------------------+
+| 'a' IN ('a','b','c') | 1 IN (2,3) | NULL IN ('a','b') | 'a' IN (NULL,'a') |
++----------------------+------------+-------------------+--------------------+
+|            1         |        0   |         NULL      |         1          |
++----------------------+------------+-------------------+--------------------+
+1 row in set (0.00 sec)
+~~~~
+
+
+
+~~~sql
+#练习：查询第2个字符是_且第3个字符是'a'的员工信息
+#需要使用转义字符: \ 
+SELECT last_name
+FROM employees
+WHERE last_name LIKE '_\_a%';
+
++-----------+
+| last_name |
++-----------+
+| a_a       |
+| a_a       |
++-----------+
+2 rows in set (0.00 sec)
+~~~
+
+REGEXP运算符在进行匹配时，常用的有下面几种通配符：
+
+（1）`‘^’`  匹配以该字符后面的字符开头的字符串。
+（2）`‘$’ ` 匹配以该字符前面的字符结尾的字符串。
+（3）`‘.’`  匹配任何一个单字符。
+（4）`“[...]”`  匹配在方括号内的任何字符。例如，“[abc]”匹配“a”或“b”或“c”。
+
+​			可以指定命名字符的范围，使用一个  `‘-'`。“[a-z]”匹配任何字母，而“[0-9]”匹配任何数字。
+
+（5）`‘*’`匹配零个或多个在它前面的字符。例如，“x”匹配一个 ‘x’ 字符，“[0-9]”一个数字，而 “*” 匹配任何数量。
+
+~~~~sql
+-- 通配符 . 代表除换行符之外的全部字符
+SELECT 'atguigu' REGEXP 'gu.gu','atguigu' REGEXP '[ab]'
+FROM DUAL;
+
++--------------------------+-------------------------+
+| 'atguigu' REGEXP 'gu.gu' | 'atguigu' REGEXP '[ab]' |
++--------------------------+-------------------------+
+|                        1 |                       1 |
++--------------------------+-------------------------+
+~~~~
+
+
+
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211012110241418.png" alt="image-20211012110241418" style="zoom: 50%;" />

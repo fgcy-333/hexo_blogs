@@ -17,7 +17,7 @@ index_img: /images/mysql.png
 ## 1. 为什么要使用数据库
 
 - 持久化(persistence)：**把数据保存到可掉电式存储设备中以供之后使用**。
-- 大多数情况下，**数据持久化意味着将内存中的数据保存到硬盘上加以”固化”**，而持久化的实现过程大多通过各种关系数据库来完成
+- 大多数情况下，**数据持久化意味着将 内存 中的数据保存到 硬盘 上加以”固化”**，而持久化的实现过程大多通过各种关系数据库来完成
 - 当然也可以存储在磁盘文件、XML数据文件中。
 
 
@@ -26,7 +26,7 @@ index_img: /images/mysql.png
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020202152071.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020202152071.png" style="zoom: 33%;" />
 
 ---
 
@@ -44,7 +44,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220619204142195](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220619204142195.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220619204142195.png" alt="image-20220619204142195" style="zoom: 50%;" />
 
 ---
 
@@ -80,31 +80,15 @@ index_img: /images/mysql.png
 
 
 
-
-
-
-
-
-
-客户、web服务器 、·数据库管理系统	、	数据库	和		表的关系如图所示：
+客户、web服务器 、数据库管理系统、数据库	和 表的关系如图所示：
 
 ---
 
-![image-20211013202511233](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013202511233.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013202511233.png" alt="image-20211013202511233" style="zoom: 33%;" />
 
 ---
 
-
-
-
-
-
-
-
-
----
-
-![image-20210915112546261](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210915112546261.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210915112546261.png" alt="image-20210915112546261" style="zoom:80%;" />
 
 ---
 
@@ -130,7 +114,7 @@ index_img: /images/mysql.png
 
 ----
 
-![image-20211013202815851](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013202815851.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013202815851.png" alt="image-20211013202815851" style="zoom:50%;" />
 
 ---
 
@@ -142,7 +126,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20211013203029492](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013203029492.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211013203029492.png" alt="image-20211013203029492" style="zoom:50%;" />
 
 ---
 
@@ -204,7 +188,7 @@ IBM公司出品，取自Information 和Unix的结合，它是第一个被移植�
 
 ---
 
-![image-20210829230656830](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210829230656830.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210829230656830.png" alt="image-20210829230656830" style="zoom:50%;" />
 
 ---
 
@@ -229,7 +213,7 @@ MySQL的历史就是整个互联网的发展史。互联网业务从社交领域
 
 ---
 
-![image-20210730161043856](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210730161043856.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210730161043856.png" alt="image-20210730161043856" style="zoom: 67%;" />
 
 ---
 
@@ -283,7 +267,7 @@ MySQL 由于其**体积小、速度快、总体拥有成本低，可处理上千
 
   ---
 
-  ![image-20211020145811031](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020145811031.png)
+  <img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020145811031.png" alt="image-20211020145811031" style="zoom:80%;" />
 
   ---
 
@@ -305,7 +289,7 @@ MySQL 由于其**体积小、速度快、总体拥有成本低，可处理上千
 
 ---
 
-![image-20210914235413708](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235413708.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235413708.png" alt="image-20210914235413708" style="zoom:80%;" />
 
 ---
 
@@ -314,7 +298,7 @@ MySQL 由于其**体积小、速度快、总体拥有成本低，可处理上千
 #### 4.1.2 优势
 
 - **复杂查询**
-  可以用`SQL`对 	a个表之间	做非常复杂的数据查询
+  可以用`SQL`对 	多个表之间	做非常复杂的数据查询
 
 
 
@@ -339,7 +323,7 @@ MySQL 由于其**体积小、速度快、总体拥有成本低，可处理上千
 
 #### 4.2.2 有哪些非关系型数据库
 
-相比于 SQL，NoSQL 泛指非关系型数据库，包括了榜单上的	**键值型数据库(redis)**	、	**文档型数据库(mongodb)**	、	**搜索引擎(ES)**	和	**列存储(HBase)**	等，除此以外还包括**图形数据库(Neo4J)**。
+相比于 SQL，NoSQL 泛指非关系型数据库，包括了榜单上的	**键值型数据库(redis)**	、	**文档型数据库(mongodb)**	、	**搜索引擎(ES)**	和	**列存储(HBase)**	等，除此以外还包括 **图形数据库 Neo4J**。
 
 
 
@@ -393,7 +377,7 @@ Key 作为唯一的标识符，优点是查找速度快，在这方面明显优�
 
 ---
 
-![image-20211020173921726](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020173921726.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020173921726.png" alt="image-20211020173921726" style="zoom:50%;" />
 
 ---
 
@@ -409,7 +393,7 @@ Key 作为唯一的标识符，优点是查找速度快，在这方面明显优�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020180934455.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211020180934455.png" style="zoom:50%;" />
 
 ---
 
@@ -500,13 +484,13 @@ ORM思想 (Object Relational Mapping)体现：
 
 - 两种建表原则： 
   - 外键唯一：主表的主键和从表的外键（唯一），形成主外键关系，外键是另一张表的主键，所以外键唯一
-  - 外键是主键：主表的主键和    **从表的主键**  ，形成主外键关系
+  - 外键是其他表的主键：主表的主键和    **从表的主键**  ，形成主外键关系
 
 
 
 ---
 
-![image-20210914235534452](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235534452.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235534452.png" alt="image-20210914235534452" style="zoom:67%;" />
 
 ---
 
@@ -520,7 +504,7 @@ ORM思想 (Object Relational Mapping)体现：
 
 - 举例：
 
-  - 员工表：编号、姓名、...、所属部门  	这是从表（多方）
+  - 员工表：编号、姓名、...所属部门  	这是从表（多方）
   - 部门表：编号、名称、简介 		 	       这是主表（一方）
 
   
@@ -539,7 +523,7 @@ ORM思想 (Object Relational Mapping)体现：
 
 ---
 
-![image-20210914235610597](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235610597.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235610597.png" alt="image-20210914235610597" style="zoom:67%;" />
 
 一个学生对应多个门课的成绩
 
@@ -569,7 +553,7 @@ ORM思想 (Object Relational Mapping)体现：
 
 ---
 
-![image-20220717225121316](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220717225121316.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220717225121316.png" alt="image-20220717225121316" style="zoom:67%;" />
 
 ---
 
@@ -638,8 +622,6 @@ ORM思想 (Object Relational Mapping)体现：
 
 同一个表中的一条记录与另一条记录相关联
 
-
-
 ---
 
 ![image-20210914235651997](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210914235651997.png)
@@ -649,3 +631,4 @@ ORM思想 (Object Relational Mapping)体现：
 典型例子就是员工表中：一般员工关联主管，主管也是员工
 
 可以采用自我引用（自关联）
+

@@ -38,7 +38,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220903151107900](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202209031511060.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202209031511060.png" alt="image-20220903151107900" style="zoom:50%;" />
 
 ---
 
@@ -50,7 +50,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220620111011618](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620111011618.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620111011618.png" alt="image-20220620111011618" style="zoom:50%;" />
 
 ---
 
@@ -68,7 +68,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20211014153604802](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153604802.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153604802.png" alt="image-20211014153604802" style="zoom:50%;" />
 
 ---
 
@@ -88,7 +88,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20211014153657668](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153657668.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153657668.png" alt="image-20211014153657668" style="zoom:50%;" />
 
 ---
 
@@ -97,8 +97,6 @@ index_img: /images/mysql.png
 
 
 **方式2：通过360或电脑管家等软件卸载**
-
----
 
 
 
@@ -116,7 +114,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20211014153722683](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153722683.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014153722683.png" alt="image-20211014153722683" style="zoom: 50%;" />
 
 ---
 
@@ -126,7 +124,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220710140847561](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140847561.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140847561.png" alt="image-20220710140847561" style="zoom:50%;" />
 
 ---
 
@@ -138,7 +136,7 @@ index_img: /images/mysql.png
 
 ----
 
-![image-20220710140933332](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140933332.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140933332.png" alt="image-20220710140933332" style="zoom:50%;" />
 
 ---
 
@@ -148,7 +146,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220710140957972](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140957972.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710140957972.png" alt="image-20220710140957972" style="zoom:50%;" />
 
 ---
 
@@ -160,7 +158,7 @@ index_img: /images/mysql.png
 
 ---
 
-![image-20220710141044341](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710141044341.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710141044341.png" alt="image-20220710141044341" style="zoom:50%;" />
 
 ---
 
@@ -223,7 +221,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务删除
 
 ---
 
-![image-20220620112741038](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620112741038.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620112741038.png" alt="image-20220620112741038" style="zoom:50%;" />
 
 ---
 
@@ -251,7 +249,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务删除
 
 
 
-目前在用navicat、sqlyoung
+目前在用Navicat、sqlyoung
 
 ### 2.2 软件的下载
 
@@ -269,7 +267,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务删除
 
 ---
 
-![image-20220620113149085](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113149085.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113149085.png" alt="image-20220620113149085" style="zoom:50%;" />
 
 ---
 
@@ -281,7 +279,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务删除
 
 ---
 
-![image-20220620113426349](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113426349.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113426349.png" alt="image-20220620113426349" style="zoom:50%;" />
 
 ---
 
@@ -295,7 +293,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
-![image-20220620113345332](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113345332.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113345332.png" alt="image-20220620113345332" style="zoom:50%;" />
 
 ---
 
@@ -307,7 +305,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
-![image-20220620113546781](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113546781.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113546781.png" alt="image-20220620113546781" style="zoom:50%;" />
 
 ---
 
@@ -319,7 +317,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
-![image-20220620113728243](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113728243.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113728243.png" alt="image-20220620113728243" style="zoom:50%;" />
 
 ---
 
@@ -339,7 +337,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
- ![image-20211014163228051](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014163228051.png)
+ <img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014163228051.png" alt="image-20211014163228051" style="zoom:50%;" />
 
 ---
 
@@ -349,7 +347,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
-![image-20211014163353156](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014163353156.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014163353156.png" alt="image-20211014163353156" style="zoom:50%;" />
 
 ---
 
@@ -361,7 +359,7 @@ Windows平台下提供两种安装文件：MySQL二进制分发版（.msi安装�
 
 ---
 
-![image-20220620113753280](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113753280.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220620113753280.png" alt="image-20220620113753280" style="zoom:50%;" />
 
 ---
 
@@ -381,7 +379,7 @@ MySQL下载完成后，找到下载文件，双击进行安装，具体操作步
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170553535.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170553535.png" style="zoom:50%;" />
 
 ---
 
@@ -397,7 +395,7 @@ MySQL下载完成后，找到下载文件，双击进行安装，具体操作步
 
 ---
 
-![image-20220710115500294](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710115500294.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710115500294.png" alt="image-20220710115500294" style="zoom:50%;" />
 
 ---
 
@@ -411,7 +409,7 @@ MySQL下载完成后，找到下载文件，双击进行安装，具体操作步
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170857263.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170857263.png" style="zoom:50%;" />
 
 ----
 
@@ -421,7 +419,7 @@ MySQL下载完成后，找到下载文件，双击进行安装，具体操作步
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170934889.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014170934889.png" style="zoom:50%;" />
 
 ---
 
@@ -431,7 +429,7 @@ MySQL下载完成后，找到下载文件，双击进行安装，具体操作步
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014171002259.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014171002259.png" style="zoom:50%;" />
 
 ---
 
@@ -447,7 +445,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image002-1634203188594.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image002-1634203188594.jpg" style="zoom:50%;" />
 
 ---
 
@@ -457,7 +455,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image004-1634203188595.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image004-1634203188595.jpg" style="zoom:50%;" />
 
 ---
 
@@ -467,7 +465,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220710151435444](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710151435444.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220710151435444.png" alt="image-20220710151435444" style="zoom:50%;" />
 
 ----
 
@@ -491,7 +489,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image008-1634203188595.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image008-1634203188595.jpg" style="zoom:50%;" />
 
 ---
 
@@ -501,7 +499,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image010-1634203188595.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image010-1634203188595.jpg" style="zoom:50%;" />
 
 ---
 
@@ -513,7 +511,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image012-1634203188596.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image012-1634203188596.jpg" style="zoom:50%;" />
 
 ---
 
@@ -523,7 +521,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image014-1634203188596.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image014-1634203188596.jpg" style="zoom:50%;" />
 
 ---
 
@@ -533,7 +531,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image016.jpg" alt="img" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image016.jpg" alt="img" style="zoom: 50%;" />
 
 ---
 
@@ -543,7 +541,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image018.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image018.jpg" style="zoom:50%;" />
 
 ---
 
@@ -553,7 +551,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image020.jpg)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image020.jpg" style="zoom:50%;" />
 
 ---
 
@@ -609,7 +607,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220621161104217](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161104217.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161104217.png" alt="image-20220621161104217" style="zoom:50%;" />
 
 ---
 
@@ -619,7 +617,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220621161242110](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161242110.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161242110.png" alt="image-20220621161242110" style="zoom:50%;" />
 
 ---
 
@@ -629,7 +627,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220621161350359](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161350359.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161350359.png" alt="image-20220621161350359" style="zoom:50%;" />
 
 ---
 
@@ -637,7 +635,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220621161434655](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161434655.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161434655.png" alt="image-20220621161434655" style="zoom:50%;" />
 
 ---
 
@@ -657,7 +655,7 @@ MySQL安装之后，需要对服务器进行配置。具体的配置步骤如下
 
 ---
 
-![image-20220621161637655](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161637655.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621161637655.png" alt="image-20220621161637655" style="zoom:50%;" />
 
 ---
 
@@ -677,7 +675,7 @@ MySQL的安装和配置是一件非常简单的事，但是在操作过程中也
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image002.gif)_
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image002.gif" style="zoom:50%;" />_
 
 ---
 
@@ -689,7 +687,7 @@ MySQL的安装和配置是一件非常简单的事，但是在操作过程中也
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image004.gif)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image004.gif" style="zoom:50%;" />
 
 ---
 
@@ -697,7 +695,7 @@ MySQL的安装和配置是一件非常简单的事，但是在操作过程中也
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image006.gif)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/clip_image006.gif" style="zoom:50%;" />
 
 ---
 
@@ -743,7 +741,7 @@ MySQL安装完毕之后，需要启动服务器进程，不然客户端无法连
 
 ---
 
-![image-20211014183908375](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014183908375.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014183908375.png" alt="image-20211014183908375" style="zoom:50%;" />
 
 ---
 
@@ -761,7 +759,7 @@ net stop MySQL服务名
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014184037414.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014184037414.png" style="zoom:50%;" />
 
 ---
 
@@ -786,7 +784,7 @@ net stop MySQL服务名
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014184425147.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014184425147.png" style="zoom:50%;" />
 
 ---
 
@@ -813,7 +811,7 @@ mysql -h localhost -P 3306 -u root -proot123  # 这里我设置的root用户的�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014185035137.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014185035137.png" style="zoom:50%;" />
 
 ---
 
@@ -921,23 +919,23 @@ show databases;
 
 四个系统默认的表：
 
-1` “information_schema”`是 MySQL 系统自带的数据库，主要保存 MySQL **数据库服务器的系统信息**
+1` information_schema `是 MySQL 系统自带的数据库，主要保存 MySQL **数据库服务器的系统信息**
 
 ​	比如数据库的名称、数据表的名称、字段名称、存取权限、数据文件 所在的文件夹和系统使用的文件夹，等等
 
 
 
-2 `“performance_schema”`是 MySQL 系统自带的数据库，可以用来**监控 MySQL 的各类性能指标**
+2 `performance_schema`是 MySQL 系统自带的数据库，可以用来**监控 MySQL 的各类性能指标**
 
 
 
-3 `“sys”`数据库是 MySQL 系统自带的数据库
+3 `sys`数据库是 MySQL 系统自带的数据库
 
 ​	主要作用是以一种更容易被理解的方式展示 MySQL **数据库服务器的各类性能指标**，帮助系统管理员和开发人员监控 MySQL 的技术性能。
 
 
 
-4 `“mysql”`数据库保存了 MySQL **数据库服务器运行时需要的系统信息**，比如数据文件夹、当前使用的字符集、约束检查信息，等等
+4 `mysql`数据库保存了 MySQL **数据库服务器运行时需要的系统信息**，比如数据文件夹、当前使用的字符集、约束检查信息，等等
 
 
 
@@ -1179,7 +1177,7 @@ default-character-set=utf8  #默认字符集
 [mysqld]  # 大概在76行左右，在其下添加
 ...
 character-set-server=utf8
-collation-server=utf8_general_ci
+collation-server=utf8_general_ci -- 普遍的大小写忽略
 ```
 
 > 注意：建议修改配置文件使用notepad++等高级文本编辑器，使用记事本等软件打开修改后可能会导致文件编码修改为“含BOM头”的编码，从而服务重启失败。
@@ -1252,7 +1250,7 @@ mysql> show variables like 'collation_%';
 
 如果创建数据库时不指定字符集和比较方式，插入中文或英文以外的语言会有乱码问题
 
-在MySQL的安装目录下找到my.ini进行修改
+在MySQL的安装目录下找到`my.ini`  / `my.cnf`进行修改
 
 
 
@@ -1286,7 +1284,7 @@ MySQL Workbench 为数据库管理员、程序开发者和系统规划师提供�
 
 ---
 
-![image-20211007153522427](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211007153522427.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211007153522427.png" alt="image-20211007153522427" style="zoom:50%;" />
 
 ---
 
@@ -1296,7 +1294,7 @@ MySQL Workbench 为数据库管理员、程序开发者和系统规划师提供�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195108502.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195108502.png" style="zoom:50%;" />
 
 ---
 
@@ -1306,7 +1304,7 @@ MySQL Workbench 为数据库管理员、程序开发者和系统规划师提供�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195129219.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195129219.png" style="zoom:50%;" />
 
 ---
 
@@ -1314,7 +1312,7 @@ MySQL Workbench 为数据库管理员、程序开发者和系统规划师提供�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195142849.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195142849.png" style="zoom:50%;" />
 
 ---
 
@@ -1339,21 +1337,21 @@ Navicat MySQL是一个强大的MySQL数据库服务器管理和开发工具。�
 
 > 下载地址：http://www.navicat.com/
 
+https://www.aliyundrive.com/s/PzWoBAKJWBb 
+
+---
+
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1557378069584.png" style="zoom:50%;" />
+
+---
+
+
+
 
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1557378069584.png)
-
----
-
-
-
-
-
----
-
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210913180359685.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20210913180359685.png" style="zoom:50%;" />
 
 ---
 
@@ -1369,7 +1367,7 @@ SQLyog 是业界著名的 Webyog 公司出品的一款简洁高效、功能强�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014213018979.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014213018979.png" style="zoom:50%;" />
 
 ---
 
@@ -1379,7 +1377,7 @@ SQLyog 是业界著名的 Webyog 公司出品的一款简洁高效、功能强�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014213036470.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014213036470.png" style="zoom:50%;" />
 
 ---
 
@@ -1395,7 +1393,7 @@ DBeaver是一个通用的数据库管理工具和 SQL 客户端，支持所有�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195237457.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195237457.png" style="zoom:50%;" />
 
 ---
 
@@ -1405,7 +1403,7 @@ DBeaver是一个通用的数据库管理工具和 SQL 客户端，支持所有�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195251371.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195251371.png" style="zoom:50%;" />
 
 ---
 
@@ -1415,7 +1413,7 @@ DBeaver是一个通用的数据库管理工具和 SQL 客户端，支持所有�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195300510.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195300510.png" style="zoom:50%;" />
 
 ---
 
@@ -1423,7 +1421,7 @@ DBeaver是一个通用的数据库管理工具和 SQL 客户端，支持所有�
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195309805.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211014195309805.png" style="zoom:50%;" />
 
 ---
 
@@ -1431,11 +1429,11 @@ DBeaver是一个通用的数据库管理工具和 SQL 客户端，支持所有�
 
 ### 可能出现连接问题：
 
-在图形界面工具，连接MySQL8时出现` “Authentication plugin 'caching_sha2_password' cannot be loaded” `错误。
+在图形界面工具，连接MySQL8.0时出现` “Authentication plugin 'caching_sha2_password' cannot be loaded” `错误。
 
 ----
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211019215249254.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211019215249254.png" style="zoom:50%;" />
 
 ----
 
@@ -1468,7 +1466,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-![](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211019215408965.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211019215408965.png" style="zoom:50%;" />
 
 ---
 
@@ -1496,7 +1494,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-![image-20220621193635459](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193635459.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193635459.png" alt="image-20220621193635459" style="zoom:50%;" />
 
 ---
 
@@ -1506,7 +1504,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-![image-20220621193718002](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193718002.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193718002.png" alt="image-20220621193718002" style="zoom:50%;" />
 
 ---
 
@@ -1516,7 +1514,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-![image-20220621193821419](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193821419.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193821419.png" alt="image-20220621193821419" style="zoom:50%;" />
 
 ---
 
@@ -1526,7 +1524,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-![image-20220621193848282](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193848282.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193848282.png" alt="image-20220621193848282" style="zoom:50%;" />
 
 ---
 
@@ -1542,7 +1540,7 @@ mysql-8.0.22 目录下的各个子目录，包含了 MySQL 各部分组件的源
 
 ---
 
-![image-20211007154113052](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211007154113052.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20211007154113052.png" alt="image-20211007154113052" style="zoom:50%;" />
 
 ---
 
@@ -1590,7 +1588,9 @@ mysqld --defaults-file="D:\sofeware\Idea\Mysql8.0.26\my.ini" --skip-grant-tables
 
 
 3: 此时，mysqld服务进程已经打开。并且不需要权限检查
+
 4: mysql -uroot 无密码登陆服务器。另启动一个客户端进行
+
 5: 修改权限表
 
 ~~~mysql
@@ -1605,7 +1605,7 @@ flush privileges;
 7: 再次通过服务管理，打开mysql服务。
 8: 即可用修改后的新密码登陆。
 
-> password(),函数是MySQL5.7才有的
+> password()函数是MySQL5.7才有的
 
 
 
@@ -1617,7 +1617,7 @@ flush privileges;
 
 ---
 
-![image-20220621195032845](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621195032845.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621195032845.png" alt="image-20220621195032845" style="zoom:50%;" />
 
 ---
 
@@ -1647,7 +1647,7 @@ ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname
 
 ---
 
-![image-20220621195240981](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621195240981.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621195240981.png" alt="image-20220621195240981" style="zoom:50%;" />
 
 ---
 
@@ -1657,7 +1657,7 @@ ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname
 
 ---
 
-![1554912943186](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554912943186.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554912943186.png" alt="1554912943186" style="zoom:50%;" />
 
 ---
 

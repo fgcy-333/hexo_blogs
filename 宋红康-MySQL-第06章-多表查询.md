@@ -174,10 +174,6 @@ select count(*) from employees;
 |       27 |
 +----------+
 
--- 错误的原因：每个员工都与每个部门匹配了一遍。
-SELECT employee_id,department_name
-FROM employees,departments;  -- 查询出2889条记录 【笛卡尔积】
-
 select 27*107 from dual;
 +--------+
 | 27*107 |
@@ -185,6 +181,12 @@ select 27*107 from dual;
 |   2889 |
 +--------+
 ```
+
+~~~mysql
+-- 错误的原因：每个员工都与每个部门匹配了一遍。
+SELECT employee_id,department_name
+FROM employees,departments;  -- 查询出2889条记录 【笛卡尔积】
+~~~
 
 
 
@@ -198,34 +200,6 @@ SELECT employee_id,department_name
 FROM employees CROSS JOIN departments;-- 【笛卡尔积，也称为交叉连接】
 
 2889 rows in set (0.00 sec)
-
-
-
-
-SELECT *
-FROM employees;  #107条记录
-
-107 rows in set (0.00 sec)
-
-
-
-SELECT 2889 / 107
-FROM DUAL; 
-
-+------------+
-| 2889 / 107 |
-+------------+
-|    27.0000 |
-+------------+
-1 row in set (0.00 sec)
-
-
-
-
-SELECT *
-FROM departments; # 27条记录
-
-27 rows in set (0.00 sec)
 ~~~
 
 我们把上述多表查询中出现的问题称为：**关系型数据库中**的	**笛卡尔积的错误**。
@@ -312,7 +286,7 @@ SELECT last_name,department_name FROM employees JOIN departments; -- 内连接
   -- 员工表一共有107个员工，但是有一个员工部门id为null；有null参与的运算结果为null；而过滤需要条件为1才会有结果
   ```
 
-- **在  表中  有  相同列时，在  列名之前  加上  表名前缀  **
+- **在  表中  有  相同列时，在  列名之前  加上  表名前缀**
 
 ~~~mysql
 SELECT last_name, department_name,department_id
@@ -485,6 +459,8 @@ WHERE  e.department_id = d.department_id;
 
 > 需要注意的是，如果我们使用了表的别名，在查询字段中、过滤条件中就只能使用别名进行代替，不能使用原有的表名，否则就会报错。
 
+----
+
 
 
 > `阿里开发规范`：
@@ -572,9 +548,9 @@ where e.salary>=j.lowest_sal AND e.salary<=j.highest_sal;
 
 注意：
 
-非等值连接，指的是连接条件不是**=**          
+非等值连接，指的是连接条件不是   **=**          
 
-**>=**    **<=** 是可以的
+**>=**    **<=**   **BETWEEN AND** 是可以的
 
 
 
@@ -852,11 +828,9 @@ ON e.`department_id` = d.`department_id`;
 
 ```mysql
 SELECT employee_id, city, department_name
-FROM   employees e 
-JOIN   departments d
-ON     d.department_id = e.department_id 
-JOIN   locations l
-ON     d.location_id = l.location_id;
+FROM   
+employees e JOIN   departments d ON     d.department_id = e.department_id 
+JOIN   locations l ON     d.location_id = l.location_id;
 
 +-------------+---------------------+------------------+
 | employee_id | city                | department_name  |
@@ -896,15 +870,14 @@ WHERE 等其他子句;
 
 ```mysql
 SELECT e.last_name, e.department_id, d.department_name
-FROM   employees e
-LEFT OUTER JOIN departments d
-ON   (e.department_id = d.department_id) ;
+FROM   
+employees e LEFT OUTER JOIN departments d ON   e.department_id = d.department_id ;
 
 +-------------+---------------+------------------+
 | last_name   | department_id | department_name  |
 +-------------+---------------+------------------+
 | King        |            90 | Executive        |
-| Grant       |          NULL | NULL             |
+| Grant       |          NULL | NULL             | -- 不满足连接条件 只给出来自主表的数据 来自从表的数据为空
 ..................................................
 | Johnson     |            80 | Sales            |
 | Gietz       |           110 | Accounting       |
@@ -944,12 +917,14 @@ ON    (e.department_id = d.department_id) ;
 | NULL        |          NULL | Payroll              |
 +-------------+---------------+----------------------+
 122 rows in set (0.00 sec)
-#解释122 ：在都满足两个表 的行的基础上，加上右表（部门表）不满足连接条件的行
+-- 解释122 ：在都满足两个表 的行的基础上，加上右表（部门表）不满足连接条件的行
 ```
 
 
 
 > 需要注意的是，LEFT JOIN 和 RIGHT JOIN 只存在于 SQL99 及以后的标准中，在 SQL92 中不存在，只能用 (+) 表示
+>
+> 而(+)这种写法只能在Oracle中使用，不能在MySQL中使用
 
 
 
@@ -961,7 +936,9 @@ ON    (e.department_id = d.department_id) ;
 - SQL99是支持满外连接的。使用FULL JOIN 或 FULL OUTER JOIN来实现。
 - **需要注意的是，MySQL不支持FULL JOIN**，但是可以用 LEFT JOIN **UNION** RIGHT join代替
 
-**MySQL不支持FULL OUTER JOIN**（满外链接）
+>  **MySQL不支持FULL OUTER JOIN**（满外链接）这种写法，Oracle支持
+>
+> 想要达到满外连接的效果需要使用UNION关键字
 
 
 
@@ -975,7 +952,11 @@ ON    (e.department_id = d.department_id) ;
 
 利用UNION关键字，可以给出多条SELECT语句，并将它们的结果组合成单个结果集
 
-合并时，两个表对应的列数和数据类型必须相同，并且相互对应。各个SELECT语句之间使用UNION或UNION ALL关键字分隔。
+合并时， **两个表** 对应的 **列数和数据类型** **必须相同**，并且相互对应。
+
+各个SELECT语句之间使用UNION或UNION ALL关键字分隔。
+
+
 
 语法格式：
 
@@ -1025,6 +1006,79 @@ SELECT * FROM employees
 WHERE email LIKE '%a%' 
 OR 
 department_id>90;
+
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+| employee_id | first_name  | last_name  | email    | phone_number       | hire_date  | job_id     | salary   | commission_pct | manager_id | department_id |
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+|         101 | Neena       | Kochhar    | NKOCHHAR | 515.123.4568       | 1989-09-21 | AD_VP      | 17000.00 |           NULL |        100 |            90 |
+|         102 | Lex         | De Haan    | LDEHAAN  | 515.123.4569       | 1993-01-13 | AD_VP      | 17000.00 |           NULL |        100 |            90 |
+|         103 | Alexander   | Hunold     | AHUNOLD  | 590.423.4567       | 1990-01-03 | IT_PROG    |  9000.00 |           NULL |        102 |            60 |
+|         105 | David       | Austin     | DAUSTIN  | 590.423.4569       | 1997-06-25 | IT_PROG    |  4800.00 |           NULL |        103 |            60 |
+|         106 | Valli       | Pataballa  | VPATABAL | 590.423.4560       | 1998-02-05 | IT_PROG    |  4800.00 |           NULL |        103 |            60 |
+|         108 | Nancy       | Greenberg  | NGREENBE | 515.124.4569       | 1994-08-17 | FI_MGR     | 12000.00 |           NULL |        101 |           100 |
+|         109 | Daniel      | Faviet     | DFAVIET  | 515.124.4169       | 1994-08-16 | FI_ACCOUNT |  9000.00 |           NULL |        108 |           100 |
+|         110 | John        | Chen       | JCHEN    | 515.124.4269       | 1997-09-28 | FI_ACCOUNT |  8200.00 |           NULL |        108 |           100 |
+|         111 | Ismael      | Sciarra    | ISCIARRA | 515.124.4369       | 1997-09-30 | FI_ACCOUNT |  7700.00 |           NULL |        108 |           100 |
+|         112 | Jose Manuel | Urman      | JMURMAN  | 515.124.4469       | 1998-03-07 | FI_ACCOUNT |  7800.00 |           NULL |        108 |           100 |
+|         113 | Luis        | Popp       | LPOPP    | 515.124.4567       | 1999-12-07 | FI_ACCOUNT |  6900.00 |           NULL |        108 |           100 |
+|         114 | Den         | Raphaely   | DRAPHEAL | 515.127.4561       | 1994-12-07 | PU_MAN     | 11000.00 |           NULL |        100 |            30 |
+|         115 | Alexander   | Khoo       | AKHOO    | 515.127.4562       | 1995-05-18 | PU_CLERK   |  3100.00 |           NULL |        114 |            30 |
+|         116 | Shelli      | Baida      | SBAIDA   | 515.127.4563       | 1997-12-24 | PU_CLERK   |  2900.00 |           NULL |        114 |            30 |
+|         117 | Sigal       | Tobias     | STOBIAS  | 515.127.4564       | 1997-07-24 | PU_CLERK   |  2800.00 |           NULL |        114 |            30 |
+|         119 | Karen       | Colmenares | KCOLMENA | 515.127.4566       | 1999-08-10 | PU_CLERK   |  2500.00 |           NULL |        114 |            30 |
+|         121 | Adam        | Fripp      | AFRIPP   | 650.123.2234       | 1997-04-10 | ST_MAN     |  8200.00 |           NULL |        100 |            50 |
+|         122 | Payam       | Kaufling   | PKAUFLIN | 650.123.3234       | 1995-05-01 | ST_MAN     |  7900.00 |           NULL |        100 |            50 |
+|         123 | Shanta      | Vollman    | SVOLLMAN | 650.123.4234       | 1997-10-10 | ST_MAN     |  6500.00 |           NULL |        100 |            50 |
+|         125 | Julia       | Nayer      | JNAYER   | 650.124.1214       | 1997-07-16 | ST_CLERK   |  3200.00 |           NULL |        120 |            50 |
+|         127 | James       | Landry     | JLANDRY  | 650.124.1334       | 1999-01-14 | ST_CLERK   |  2400.00 |           NULL |        120 |            50 |
+|         128 | Steven      | Markle     | SMARKLE  | 650.124.1434       | 2000-03-08 | ST_CLERK   |  2200.00 |           NULL |        120 |            50 |
+|         130 | Mozhe       | Atkinson   | MATKINSO | 650.124.6234       | 1997-10-30 | ST_CLERK   |  2800.00 |           NULL |        121 |            50 |
+|         131 | James       | Marlow     | JAMRLOW  | 650.124.7234       | 1997-02-16 | ST_CLERK   |  2500.00 |           NULL |        121 |            50 |
+|         133 | Jason       | Mallin     | JMALLIN  | 650.127.1934       | 1996-06-14 | ST_CLERK   |  3300.00 |           NULL |        122 |            50 |
+|         136 | Hazel       | Philtanker | HPHILTAN | 650.127.1634       | 2000-02-06 | ST_CLERK   |  2200.00 |           NULL |        122 |            50 |
+|         137 | Renske      | Ladwig     | RLADWIG  | 650.121.1234       | 1995-07-14 | ST_CLERK   |  3600.00 |           NULL |        123 |            50 |
+|         140 | Joshua      | Patel      | JPATEL   | 650.121.1834       | 1998-04-06 | ST_CLERK   |  2500.00 |           NULL |        123 |            50 |
+|         141 | Trenna      | Rajs       | TRAJS    | 650.121.8009       | 1995-10-17 | ST_CLERK   |  3500.00 |           NULL |        124 |            50 |
+|         142 | Curtis      | Davies     | CDAVIES  | 650.121.2994       | 1997-01-29 | ST_CLERK   |  3100.00 |           NULL |        124 |            50 |
+|         143 | Randall     | Matos      | RMATOS   | 650.121.2874       | 1998-03-15 | ST_CLERK   |  2600.00 |           NULL |        124 |            50 |
+|         144 | Peter       | Vargas     | PVARGAS  | 650.121.2004       | 1998-07-09 | ST_CLERK   |  2500.00 |           NULL |        124 |            50 |
+|         146 | Karen       | Partners   | KPARTNER | 011.44.1344.467268 | 1997-01-05 | SA_MAN     | 13500.00 |           0.30 |        100 |            80 |
+|         147 | Alberto     | Errazuriz  | AERRAZUR | 011.44.1344.429278 | 1997-03-10 | SA_MAN     | 12000.00 |           0.30 |        100 |            80 |
+|         148 | Gerald      | Cambrault  | GCAMBRAU | 011.44.1344.619268 | 1999-10-15 | SA_MAN     | 11000.00 |           0.30 |        100 |            80 |
+|         152 | Peter       | Hall       | PHALL    | 011.44.1344.478968 | 1997-08-20 | SA_REP     |  9000.00 |           0.25 |        145 |            80 |
+|         154 | Nanette     | Cambrault  | NCAMBRAU | 011.44.1344.987668 | 1998-12-09 | SA_REP     |  7500.00 |           0.20 |        145 |            80 |
+|         155 | Oliver      | Tuvault    | OTUVAULT | 011.44.1344.486508 | 1999-11-23 | SA_REP     |  7000.00 |           0.15 |        145 |            80 |
+|         158 | Allan       | McEwen     | AMCEWEN  | 011.44.1345.829268 | 1996-08-01 | SA_REP     |  9000.00 |           0.35 |        146 |            80 |
+|         160 | Louise      | Doran      | LDORAN   | 011.44.1345.629268 | 1997-12-15 | SA_REP     |  7500.00 |           0.30 |        146 |            80 |
+|         161 | Sarath      | Sewall     | SSEWALL  | 011.44.1345.529268 | 1998-11-03 | SA_REP     |  7000.00 |           0.25 |        146 |            80 |
+|         164 | Mattea      | Marvins    | MMARVINS | 011.44.1346.329268 | 2000-01-24 | SA_REP     |  7200.00 |           0.10 |        147 |            80 |
+|         166 | Sundar      | Ande       | SANDE    | 011.44.1346.629268 | 2000-03-24 | SA_REP     |  6400.00 |           0.10 |        147 |            80 |
+|         167 | Amit        | Banda      | ABANDA   | 011.44.1346.729268 | 2000-04-21 | SA_REP     |  6200.00 |           0.10 |        147 |            80 |
+|         172 | Elizabeth   | Bates      | EBATES   | 011.44.1343.529268 | 1999-03-24 | SA_REP     |  7300.00 |           0.15 |        148 |            80 |
+|         173 | Sundita     | Kumar      | SKUMAR   | 011.44.1343.329268 | 2000-04-21 | SA_REP     |  6100.00 |           0.10 |        148 |            80 |
+|         174 | Ellen       | Abel       | EABEL    | 011.44.1644.429267 | 1996-05-11 | SA_REP     | 11000.00 |           0.30 |        149 |            80 |
+|         175 | Alyssa      | Hutton     | AHUTTON  | 011.44.1644.429266 | 1997-03-19 | SA_REP     |  8800.00 |           0.25 |        149 |            80 |
+|         176 | Jonathon    | Taylor     | JTAYLOR  | 011.44.1644.429265 | 1998-03-24 | SA_REP     |  8600.00 |           0.20 |        149 |            80 |
+|         178 | Kimberely   | Grant      | KGRANT   | 011.44.1644.429263 | 1999-05-24 | SA_REP     |  7000.00 |           0.15 |        149 |          NULL |
+|         180 | Winston     | Taylor     | WTAYLOR  | 650.507.9876       | 1998-01-24 | SH_CLERK   |  3200.00 |           NULL |        120 |            50 |
+|         181 | Jean        | Fleaur     | JFLEAUR  | 650.507.9877       | 1998-02-23 | SH_CLERK   |  3100.00 |           NULL |        120 |            50 |
+|         182 | Martha      | Sullivan   | MSULLIVA | 650.507.9878       | 1999-06-21 | SH_CLERK   |  2500.00 |           NULL |        120 |            50 |
+|         184 | Nandita     | Sarchand   | NSARCHAN | 650.509.1876       | 1996-01-27 | SH_CLERK   |  4200.00 |           NULL |        121 |            50 |
+|         185 | Alexis      | Bull       | ABULL    | 650.509.2876       | 1997-02-20 | SH_CLERK   |  4100.00 |           NULL |        121 |            50 |
+|         187 | Anthony     | Cabrio     | ACABRIO  | 650.509.4876       | 1999-02-07 | SH_CLERK   |  3000.00 |           NULL |        121 |            50 |
+|         190 | Timothy     | Gates      | TGATES   | 650.505.3876       | 1998-07-11 | SH_CLERK   |  2900.00 |           NULL |        122 |            50 |
+|         194 | Samuel      | McCain     | SMCCAIN  | 650.501.3876       | 1998-07-01 | SH_CLERK   |  3200.00 |           NULL |        123 |            50 |
+|         196 | Alana       | Walsh      | AWALSH   | 650.507.9811       | 1998-04-24 | SH_CLERK   |  3100.00 |           NULL |        124 |            50 |
+|         199 | Douglas     | Grant      | DGRANT   | 650.507.9844       | 2000-01-13 | SH_CLERK   |  2600.00 |           NULL |        124 |            50 |
+|         200 | Jennifer    | Whalen     | JWHALEN  | 515.123.4444       | 1987-09-17 | AD_ASST    |  4400.00 |           NULL |        101 |            10 |
+|         201 | Michael     | Hartstein  | MHARTSTE | 515.123.5555       | 1996-02-17 | MK_MAN     | 13000.00 |           NULL |        100 |            20 |
+|         202 | Pat         | Fay        | PFAY     | 603.123.6666       | 1997-08-17 | MK_REP     |  6000.00 |           NULL |        201 |            20 |
+|         203 | Susan       | Mavris     | SMAVRIS  | 515.123.7777       | 1994-06-07 | HR_REP     |  6500.00 |           NULL |        101 |            40 |
+|         204 | Hermann     | Baer       | HBAER    | 515.123.8888       | 1994-06-07 | PR_REP     | 10000.00 |           NULL |        101 |            70 |
+|         205 | Shelley     | Higgins    | SHIGGINS | 515.123.8080       | 1994-06-07 | AC_MGR     | 12000.00 |           NULL |        101 |           110 |
+|         206 | William     | a_a        | WGIETZ   | 515.123.8181       | 1994-06-07 | AC_ACCOUNT |  8300.00 |           NULL |        205 |           110 |
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+67 rows in set (0.01 sec)
 ```
 
 ---
@@ -1038,13 +1092,80 @@ SELECT * FROM employees
 UNION
 	SELECT * FROM employees  
 WHERE department_id>90;
+
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+| employee_id | first_name  | last_name  | email    | phone_number       | hire_date  | job_id     | salary   | commission_pct | manager_id | department_id |
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+|         101 | Neena       | Kochhar    | NKOCHHAR | 515.123.4568       | 1989-09-21 | AD_VP      | 17000.00 |           NULL |        100 |            90 |
+|         102 | Lex         | De Haan    | LDEHAAN  | 515.123.4569       | 1993-01-13 | AD_VP      | 17000.00 |           NULL |        100 |            90 |
+|         103 | Alexander   | Hunold     | AHUNOLD  | 590.423.4567       | 1990-01-03 | IT_PROG    |  9000.00 |           NULL |        102 |            60 |
+|         105 | David       | Austin     | DAUSTIN  | 590.423.4569       | 1997-06-25 | IT_PROG    |  4800.00 |           NULL |        103 |            60 |
+|         106 | Valli       | Pataballa  | VPATABAL | 590.423.4560       | 1998-02-05 | IT_PROG    |  4800.00 |           NULL |        103 |            60 |
+|         109 | Daniel      | Faviet     | DFAVIET  | 515.124.4169       | 1994-08-16 | FI_ACCOUNT |  9000.00 |           NULL |        108 |           100 |
+|         111 | Ismael      | Sciarra    | ISCIARRA | 515.124.4369       | 1997-09-30 | FI_ACCOUNT |  7700.00 |           NULL |        108 |           100 |
+|         112 | Jose Manuel | Urman      | JMURMAN  | 515.124.4469       | 1998-03-07 | FI_ACCOUNT |  7800.00 |           NULL |        108 |           100 |
+|         114 | Den         | Raphaely   | DRAPHEAL | 515.127.4561       | 1994-12-07 | PU_MAN     | 11000.00 |           NULL |        100 |            30 |
+|         115 | Alexander   | Khoo       | AKHOO    | 515.127.4562       | 1995-05-18 | PU_CLERK   |  3100.00 |           NULL |        114 |            30 |
+|         116 | Shelli      | Baida      | SBAIDA   | 515.127.4563       | 1997-12-24 | PU_CLERK   |  2900.00 |           NULL |        114 |            30 |
+|         117 | Sigal       | Tobias     | STOBIAS  | 515.127.4564       | 1997-07-24 | PU_CLERK   |  2800.00 |           NULL |        114 |            30 |
+|         119 | Karen       | Colmenares | KCOLMENA | 515.127.4566       | 1999-08-10 | PU_CLERK   |  2500.00 |           NULL |        114 |            30 |
+|         121 | Adam        | Fripp      | AFRIPP   | 650.123.2234       | 1997-04-10 | ST_MAN     |  8200.00 |           NULL |        100 |            50 |
+|         122 | Payam       | Kaufling   | PKAUFLIN | 650.123.3234       | 1995-05-01 | ST_MAN     |  7900.00 |           NULL |        100 |            50 |
+|         123 | Shanta      | Vollman    | SVOLLMAN | 650.123.4234       | 1997-10-10 | ST_MAN     |  6500.00 |           NULL |        100 |            50 |
+|         125 | Julia       | Nayer      | JNAYER   | 650.124.1214       | 1997-07-16 | ST_CLERK   |  3200.00 |           NULL |        120 |            50 |
+|         127 | James       | Landry     | JLANDRY  | 650.124.1334       | 1999-01-14 | ST_CLERK   |  2400.00 |           NULL |        120 |            50 |
+|         128 | Steven      | Markle     | SMARKLE  | 650.124.1434       | 2000-03-08 | ST_CLERK   |  2200.00 |           NULL |        120 |            50 |
+|         130 | Mozhe       | Atkinson   | MATKINSO | 650.124.6234       | 1997-10-30 | ST_CLERK   |  2800.00 |           NULL |        121 |            50 |
+|         131 | James       | Marlow     | JAMRLOW  | 650.124.7234       | 1997-02-16 | ST_CLERK   |  2500.00 |           NULL |        121 |            50 |
+|         133 | Jason       | Mallin     | JMALLIN  | 650.127.1934       | 1996-06-14 | ST_CLERK   |  3300.00 |           NULL |        122 |            50 |
+|         136 | Hazel       | Philtanker | HPHILTAN | 650.127.1634       | 2000-02-06 | ST_CLERK   |  2200.00 |           NULL |        122 |            50 |
+|         137 | Renske      | Ladwig     | RLADWIG  | 650.121.1234       | 1995-07-14 | ST_CLERK   |  3600.00 |           NULL |        123 |            50 |
+|         140 | Joshua      | Patel      | JPATEL   | 650.121.1834       | 1998-04-06 | ST_CLERK   |  2500.00 |           NULL |        123 |            50 |
+|         141 | Trenna      | Rajs       | TRAJS    | 650.121.8009       | 1995-10-17 | ST_CLERK   |  3500.00 |           NULL |        124 |            50 |
+|         142 | Curtis      | Davies     | CDAVIES  | 650.121.2994       | 1997-01-29 | ST_CLERK   |  3100.00 |           NULL |        124 |            50 |
+|         143 | Randall     | Matos      | RMATOS   | 650.121.2874       | 1998-03-15 | ST_CLERK   |  2600.00 |           NULL |        124 |            50 |
+|         144 | Peter       | Vargas     | PVARGAS  | 650.121.2004       | 1998-07-09 | ST_CLERK   |  2500.00 |           NULL |        124 |            50 |
+|         146 | Karen       | Partners   | KPARTNER | 011.44.1344.467268 | 1997-01-05 | SA_MAN     | 13500.00 |           0.30 |        100 |            80 |
+|         147 | Alberto     | Errazuriz  | AERRAZUR | 011.44.1344.429278 | 1997-03-10 | SA_MAN     | 12000.00 |           0.30 |        100 |            80 |
+|         148 | Gerald      | Cambrault  | GCAMBRAU | 011.44.1344.619268 | 1999-10-15 | SA_MAN     | 11000.00 |           0.30 |        100 |            80 |
+|         152 | Peter       | Hall       | PHALL    | 011.44.1344.478968 | 1997-08-20 | SA_REP     |  9000.00 |           0.25 |        145 |            80 |
+|         154 | Nanette     | Cambrault  | NCAMBRAU | 011.44.1344.987668 | 1998-12-09 | SA_REP     |  7500.00 |           0.20 |        145 |            80 |
+|         155 | Oliver      | Tuvault    | OTUVAULT | 011.44.1344.486508 | 1999-11-23 | SA_REP     |  7000.00 |           0.15 |        145 |            80 |
+|         158 | Allan       | McEwen     | AMCEWEN  | 011.44.1345.829268 | 1996-08-01 | SA_REP     |  9000.00 |           0.35 |        146 |            80 |
+|         160 | Louise      | Doran      | LDORAN   | 011.44.1345.629268 | 1997-12-15 | SA_REP     |  7500.00 |           0.30 |        146 |            80 |
+|         161 | Sarath      | Sewall     | SSEWALL  | 011.44.1345.529268 | 1998-11-03 | SA_REP     |  7000.00 |           0.25 |        146 |            80 |
+|         164 | Mattea      | Marvins    | MMARVINS | 011.44.1346.329268 | 2000-01-24 | SA_REP     |  7200.00 |           0.10 |        147 |            80 |
+|         166 | Sundar      | Ande       | SANDE    | 011.44.1346.629268 | 2000-03-24 | SA_REP     |  6400.00 |           0.10 |        147 |            80 |
+|         167 | Amit        | Banda      | ABANDA   | 011.44.1346.729268 | 2000-04-21 | SA_REP     |  6200.00 |           0.10 |        147 |            80 |
+|         172 | Elizabeth   | Bates      | EBATES   | 011.44.1343.529268 | 1999-03-24 | SA_REP     |  7300.00 |           0.15 |        148 |            80 |
+|         173 | Sundita     | Kumar      | SKUMAR   | 011.44.1343.329268 | 2000-04-21 | SA_REP     |  6100.00 |           0.10 |        148 |            80 |
+|         174 | Ellen       | Abel       | EABEL    | 011.44.1644.429267 | 1996-05-11 | SA_REP     | 11000.00 |           0.30 |        149 |            80 |
+|         175 | Alyssa      | Hutton     | AHUTTON  | 011.44.1644.429266 | 1997-03-19 | SA_REP     |  8800.00 |           0.25 |        149 |            80 |
+|         176 | Jonathon    | Taylor     | JTAYLOR  | 011.44.1644.429265 | 1998-03-24 | SA_REP     |  8600.00 |           0.20 |        149 |            80 |
+|         178 | Kimberely   | Grant      | KGRANT   | 011.44.1644.429263 | 1999-05-24 | SA_REP     |  7000.00 |           0.15 |        149 |          NULL |
+|         180 | Winston     | Taylor     | WTAYLOR  | 650.507.9876       | 1998-01-24 | SH_CLERK   |  3200.00 |           NULL |        120 |            50 |
+|         181 | Jean        | Fleaur     | JFLEAUR  | 650.507.9877       | 1998-02-23 | SH_CLERK   |  3100.00 |           NULL |        120 |            50 |
+|         182 | Martha      | Sullivan   | MSULLIVA | 650.507.9878       | 1999-06-21 | SH_CLERK   |  2500.00 |           NULL |        120 |            50 |
+|         184 | Nandita     | Sarchand   | NSARCHAN | 650.509.1876       | 1996-01-27 | SH_CLERK   |  4200.00 |           NULL |        121 |            50 |
+|         185 | Alexis      | Bull       | ABULL    | 650.509.2876       | 1997-02-20 | SH_CLERK   |  4100.00 |           NULL |        121 |            50 |
+|         187 | Anthony     | Cabrio     | ACABRIO  | 650.509.4876       | 1999-02-07 | SH_CLERK   |  3000.00 |           NULL |        121 |            50 |
+|         190 | Timothy     | Gates      | TGATES   | 650.505.3876       | 1998-07-11 | SH_CLERK   |  2900.00 |           NULL |        122 |            50 |
+|         194 | Samuel      | McCain     | SMCCAIN  | 650.501.3876       | 1998-07-01 | SH_CLERK   |  3200.00 |           NULL |        123 |            50 |
+|         196 | Alana       | Walsh      | AWALSH   | 650.507.9811       | 1998-04-24 | SH_CLERK   |  3100.00 |           NULL |        124 |            50 |
+|         199 | Douglas     | Grant      | DGRANT   | 650.507.9844       | 2000-01-13 | SH_CLERK   |  2600.00 |           NULL |        124 |            50 |
+|         200 | Jennifer    | Whalen     | JWHALEN  | 515.123.4444       | 1987-09-17 | AD_ASST    |  4400.00 |           NULL |        101 |            10 |
+|         201 | Michael     | Hartstein  | MHARTSTE | 515.123.5555       | 1996-02-17 | MK_MAN     | 13000.00 |           NULL |        100 |            20 |
+|         202 | Pat         | Fay        | PFAY     | 603.123.6666       | 1997-08-17 | MK_REP     |  6000.00 |           NULL |        201 |            20 |
+|         203 | Susan       | Mavris     | SMAVRIS  | 515.123.7777       | 1994-06-07 | HR_REP     |  6500.00 |           NULL |        101 |            40 |
+|         204 | Hermann     | Baer       | HBAER    | 515.123.8888       | 1994-06-07 | PR_REP     | 10000.00 |           NULL |        101 |            70 |
+|         108 | Nancy       | Greenberg  | NGREENBE | 515.124.4569       | 1994-08-17 | FI_MGR     | 12000.00 |           NULL |        101 |           100 |
+|         110 | John        | Chen       | JCHEN    | 515.124.4269       | 1997-09-28 | FI_ACCOUNT |  8200.00 |           NULL |        108 |           100 |
+|         113 | Luis        | Popp       | LPOPP    | 515.124.4567       | 1999-12-07 | FI_ACCOUNT |  6900.00 |           NULL |        108 |           100 |
+|         205 | Shelley     | Higgins    | SHIGGINS | 515.123.8080       | 1994-06-07 | AC_MGR     | 12000.00 |           NULL |        101 |           110 |
+|         206 | William     | a_a        | WGIETZ   | 515.123.8181       | 1994-06-07 | AC_ACCOUNT |  8300.00 |           NULL |        205 |           110 |
++-------------+-------------+------------+----------+--------------------+------------+------------+----------+----------------+------------+---------------+
+67 rows in set (0.00 sec)
 ```
-
-
-
-
-
-
 
 
 
@@ -1078,7 +1199,7 @@ SELECT id,tname FROM t_usmale
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554979255233.png" alt="1554979255233" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554979255233.png" alt="1554979255233" style="zoom: 33%;" />
 
 ---
 
@@ -1104,8 +1225,7 @@ SELECT id,tname FROM t_usmale
 #中图：内连接 A∩B
 -- 99内连接
 SELECT employee_id,department_name
-FROM employees e JOIN departments d
-ON e.`department_id` = d.`department_id`;
+FROM employees e JOIN departments d ON e.`department_id` = d.`department_id`;
 ~~~
 
 
@@ -1113,8 +1233,8 @@ ON e.`department_id` = d.`department_id`;
 ~~~mysql
 -- 混合内连接【上面是99 下面是92】
 SELECT employee_id,department_name
-FROM employees e JOIN departments d
-where e.`department_id` = d.`department_id`;
+FROM employees e JOIN departments d -- 99
+where e.`department_id` = d.`department_id`; -- 92
 
 +-------------+------------------+
 | employee_id | department_name  |
@@ -1130,8 +1250,7 @@ where e.`department_id` = d.`department_id`;
 ~~~mysql
 #左上图：左外连接
 SELECT employee_id,department_name
-FROM employees e LEFT JOIN departments d
-ON e.`department_id` = d.`department_id`;
+FROM employees e LEFT JOIN departments d ON e.`department_id` = d.`department_id`;
 
 +-------------+------------------+
 | employee_id | department_name  |
@@ -1247,7 +1366,7 @@ ON e.`department_id` = d.`department_id`;
 107 rows in set (0.00 sec)
 
 -- 有一个职工没有部门id 如果是内连接就是106条记录
--- 但这个是左外连接,在内连接的基础上,再找到左边表不满足连接条件的记录
+-- 但这个是左外连接,在内连接的基础上,再找到左边表不满足连接条件的记录 107
 ~~~
 
 
@@ -1256,9 +1375,7 @@ ON e.`department_id` = d.`department_id`;
 
 ~~~mysql
 SELECT employee_id,department_name
-FROM employees e RIGHT JOIN departments d
-ON e.`department_id` = d.`department_id`;
-
+FROM employees e RIGHT JOIN departments d ON e.`department_id` = d.`department_id`;
 
 +-------------+----------------------+
 | employee_id | department_name      |
@@ -1388,10 +1505,8 @@ ON e.`department_id` = d.`department_id`;
 +-------------+----------------------+
 122 rows in set (0.00 sec)
 
-
-
 -- 有一个职工没有部门id 如果是内连接就是106条记录
--- 但这个是右外连接,在内连接的基础上,再找到右表中不满足连接条件的记录(只有部门记录,没有员工记录的记录)
+-- 但这个是右外连接,在内连接的基础上,再找到右表中不满足连接条件的记录(只有部门记录,没有员工记录的记录 6) 122
 ~~~
 
 
@@ -1425,10 +1540,11 @@ WHERE e.`department_id`<=>NULL;
 ### 4.0 左中图
 
 ~~~mysql
-#左中图：A - A∩B
+#左中图：A - A ∩ B
+-- A:相当于左外连接 相当于A与B的内连接 + A中不满足A与B连接条件的记录
+-- 所以只需要A中不满足A与B连接条件的记录
 SELECT employee_id,department_name
-FROM employees e LEFT JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM employees e LEFT JOIN departments d ON e.`department_id` = d.`department_id`
 WHERE d.`department_id` IS NULL;   -- 注意：不要使用 WHERE d.`department_id` = NULL 有null参与的运算结果为null，一条都没有
 
 +-------------+-----------------+
@@ -1457,8 +1573,8 @@ SQL执行是从FROM开始的，所以一开始有 多个表中所有符合的记
 -- 原理 同左中图 略
 #右中图：B-A∩B
 SELECT employee_id,department_name
-FROM employees e RIGHT JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM 
+employees e RIGHT JOIN departments dON e.`department_id` = d.`department_id`
 WHERE e.`department_id` IS NULL;
 +-------------+----------------------+
 | employee_id | department_name      |
@@ -1478,13 +1594,14 @@ WHERE e.`department_id` IS NULL;
 
 ~~~mysql
 SELECT employee_id,department_name
-FROM employees e LEFT JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM 
+employees e LEFT JOIN departments d ON e.`department_id` = d.`department_id`
 UNION ALL  #没有去重操作，效率高
 SELECT employee_id,department_name
-FROM employees e RIGHT JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM 
+employees e RIGHT JOIN departments d ON e.`department_id` = d.`department_id`
 WHERE e.`department_id` IS NULL;
+
 +-------------+----------------------+
 | employee_id | department_name      |
 +-------------+----------------------+
@@ -1732,7 +1849,11 @@ USING (department_id);
 
 
 
-你能看出与自然连接 NATURAL JOIN 不同的是，USING 指定了具体的相同的字段名称，你需要在 USING 的括号 () 中填入要指定**的同名字段**。同时使用 `JOIN...USING` 可以简化 JOIN ON 的等值连接。它与下面的 SQL 查询结果是相同的：
+你能看出与自然连接 NATURAL JOIN 不同的是，USING 指定了具体的相同的字段名称，你需要在 USING 的括号 () 中填入要指定**的同名字段**。
+
+同时使用 `JOIN...USING` 可以简化 JOIN ON 的等值连接。
+
+它与下面的 SQL 查询结果是相同的：
 
 ```mysql
 SELECT employee_id,last_name,department_name
@@ -1759,6 +1880,7 @@ WHERE e.department_id = d.department_id;
 ~~~mysql
 #关联条件
 #把关联条件写在where后面
+-- sql92内连接
 SELECT last_name,department_name 
 FROM employees,departments 
 WHERE employees.department_id = departments.department_id;
@@ -1768,17 +1890,18 @@ WHERE employees.department_id = departments.department_id;
 
 ~~~mysql
 #把关联条件写在on后面，只能和JOIN一起使用
+-- sql99 内连接
 SELECT last_name,department_name 
-FROM employees INNER JOIN departments 
-ON employees.department_id = departments.department_id;
+FROM 
+employees INNER JOIN departments ON employees.department_id = departments.department_id;
 
 SELECT last_name,department_name 
-FROM employees CROSS JOIN departments 
-ON employees.department_id = departments.department_id;
+FROM 
+employees CROSS JOIN departments  ON employees.department_id = departments.department_id;
 
 SELECT last_name,department_name  
-FROM employees JOIN departments 
-ON employees.department_id = departments.department_id;
+FROM 
+employees JOIN departments  ON employees.department_id = departments.department_id;
 ~~~
 
 
@@ -1787,6 +1910,7 @@ ON employees.department_id = departments.department_id;
 #把关联字段写在using()中，只能和JOIN一起使用
 #而且两个表中的关联字段必须名称相同，而且只能表示=
 #查询员工姓名与基本工资
+-- USING()同名字段等值连接
 SELECT last_name,job_title
 FROM employees INNER JOIN jobs
 USING(job_id);
@@ -1797,7 +1921,9 @@ USING(job_id);
 ```mysql
 #n张表关联，需要n-1个关联条件
 #查询员工姓名，基本工资，部门名称
-SELECT last_name,job_title,department_name FROM employees,departments,jobs 
+-- sql92内连接
+SELECT last_name,job_title,department_name 
+FROM employees,departments,jobs 
 WHERE employees.department_id = departments.department_id 
 AND employees.job_id = jobs.job_id;
 
@@ -1813,7 +1939,9 @@ AND employees.job_id = jobs.job_id;
 
 1、92语法，内连接时，连接条件写在WHERE中
 
-2、99语法，外连接时，连接条件写在ON中；如果用了ON前面必须是使用 JOIN;
+2、99语法，连接时，连接条件写在ON中；如果用了ON前面必须是使用 JOIN;但是，前面使用了JOIN
+
+关键字 后面不一定要使用ON关键字
 
 3、99语法新特性，USING（字段名）；前面必须使用 JOIN
 
@@ -1827,7 +1955,13 @@ AND employees.job_id = jobs.job_id;
 
 在许多 DBMS 中，也都会有最大连接表的限制。
 
-> 【强制】超过三个表禁止 join。需要 join 的字段，数据类型保持绝对一致；多表关联查询时， 保证被关联的字段需要有索引。 
+> 【强制】
+>
+> 超过三个表禁止 join。
+>
+> 需要 join 的字段，数据类型保持绝对一致；
+>
+> 多表关联查询时， 保证被关联的字段需要有索引。 
 >
 > 说明：即使双表 join 也要注意表索引、SQL 性能。
 >
@@ -1886,8 +2020,8 @@ SQL 有两个主要的标准，分别是 `SQL92` 和 `SQL99`
 ~~~mysql
 # 99外连接
 SELECT last_name,d.department_id,department_name
-  FROM employees LEFT JOIN departments d
-  ON employees.department_id=d.department_id;
+  FROM 
+  employees LEFT JOIN departments d ON employees.department_id=d.department_id;
 +-------------+---------------+------------------+
 | last_name   | department_id | department_name  |
 +-------------+---------------+------------------+
@@ -1913,8 +2047,8 @@ SELECT last_name,d.department_id,department_name
 
 ~~~mysql
 SELECT e.job_id,d.location_id
-FROM employees e JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM 
+employees e JOIN departments d ON e.`department_id` = d.`department_id`
 WHERE d.`department_id` = 90;
 +---------+-------------+
 | job_id  | location_id |
@@ -1931,10 +2065,9 @@ WHERE d.`department_id` = 90;
 
 ~~~MYSQL
 SELECT e.last_name ,e.`commission_pct`, d.department_name , d.location_id , l.city
-FROM employees e  JOIN departments d
-ON e.`department_id` = d.`department_id`
- JOIN locations l
-ON d.`location_id` = l.`location_id`
+FROM 
+employees e  JOIN departments d ON e.`department_id` = d.`department_id`
+ JOIN locations l ON d.`location_id` = l.`location_id`
 WHERE e.`commission_pct` IS NOT NULL; 
 
 34 rows in set (0.00 sec)
@@ -2065,7 +2198,7 @@ WHERE d.`department_name` = 'Executive';
 
 
 
-## 6.0选择指定员工的姓名，员工号，以及他的管理者的姓名和员工号**
+## 6.0选择指定员工的姓名，员工号，以及他的管理者的姓名和员工号
 
 ~~~mysql
 -- 自连接+左外连接【使用自链接，且这个自链接，就是左外连接】
@@ -2094,8 +2227,8 @@ ON emp.manager_id = mgr.employee_id;
 
 ~~~mysql
 SELECT d.department_id
-FROM departments d LEFT JOIN employees e
-ON d.`department_id` = e.`department_id`
+FROM 
+departments d LEFT JOIN employees e ON d.`department_id` = e.`department_id`
 WHERE e.`department_id` IS NULL;
 
 +---------------+
@@ -2106,7 +2239,6 @@ WHERE e.`department_id` IS NULL;
 |           270 |
 +---------------+
 16 rows in set (0.00 sec)
-
 ~~~
 
 注意：
@@ -2146,8 +2278,8 @@ WHERE NOT EXISTS (
 
 ~~~mysql
 SELECT l.location_id,l.city
-FROM locations l LEFT JOIN departments d
-ON l.`location_id` = d.`location_id`
+FROM 
+locations l LEFT JOIN departments d ON l.`location_id` = d.`location_id`
 -- 城市是固定的，肯定是判断部门表的某个部门有没有城市
 WHERE d.`location_id` IS NULL;
 
@@ -2173,7 +2305,9 @@ WHERE d.`location_id` IS NULL;
 ~~~mysql
 SELECT department_id
 FROM departments
-WHERE department_id IN (1000,1100,1200,1300,1600);
+WHERE location_id  IN (1000,1100,1200,1300,1600);
+
+Empty set (0.00 sec)
 ~~~
 
 
@@ -2186,8 +2320,8 @@ WHERE department_id IN (1000,1100,1200,1300,1600);
 
 ~~~mysql
 SELECT e.employee_id,e.last_name,e.department_id
-FROM employees e JOIN departments d
-ON e.`department_id` = d.`department_id`
+FROM 
+employees e JOIN departments d ON e.`department_id` = d.`department_id`
 WHERE d.`department_name` IN ('Sales','IT');
 
 +-------------+------------+---------------+
@@ -2217,6 +2351,3 @@ WHERE d.`department_name` IN ('Sales','IT');
 
 
 记得要在字段前加表名
-
-
-

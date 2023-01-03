@@ -41,7 +41,7 @@ index_img: /images/mysql.png
   - **SUM()**
   - **MAX()** 
   - **MIN()** 
-  - **COUNT() **
+  - **COUNT()**
 
 - 聚合函数语法
 
@@ -82,13 +82,13 @@ WHERE  job_id LIKE '%REP%';
 
 ### 1.2 MIN和MAX函数
 
-可以对**任意数据类型**的数据使用 MIN 和 MAX 函数
+可以对 **任意数据类型** 的数据使用 MIN 和 MAX 函数
 
 既可以对字符串、日期进行比较
 
 ```sql
 SELECT MIN(hire_date), MAX(hire_date)
-FROM	  employees;
+FROM employees;
 
 +----------------+----------------+
 | MIN(hire_date) | MAX(hire_date) |
@@ -119,7 +119,7 @@ FROM employees
 
 
 
-- COUNT(expr)
+- COUNT(具体字段)
 
   返回**expr不为空**的记录总数。
 
@@ -171,7 +171,7 @@ WHERE commission_pct IS NOT NULL;
 
   其实，对于MyISAM引擎的表是没有区别的。这种引擎内部有一计数器在维护着行数。
 
-  Innodb引擎的表用count(*),count(1)直接读行数，复杂度是O(n)，因为innodb真的要去数一遍。但好于具体的count(列名)。
+  Innodb引擎的表用count(*),count(1)直接读行数，复杂度是O(n)，因为innodb真的要去数一遍。但好于具体的count(列名)  count(列名)需要判空，空值不做计算。
 
 - **问题：能不能使用count(列名)替换count(*)?**
 
@@ -192,9 +192,9 @@ AVG(commission_pct),SUM(commission_pct)/COUNT(commission_pct),
 SUM(commission_pct) / 107
 FROM employees;
 +-------------+---------------------------+---------------------+-------------------------------------------+-------------------
-|AVG(salary)|SUM(salary)/COUNT(salary)|AVG(commission_pct)|SUM(commission_pct)/COUNT(commission_pct) | SUM(commission_pct) / 107 |
+|AVG(salary)  |SUM(salary)/COUNT(salary)  |AVG(commission_pct)  |SUM(commission_pct)/COUNT(commission_pct)  | SUM(commission_pct) / 107 |
 +-------------+---------------------------+---------------------+-------------------------------------------+-------------------
-| 6461.682243 |           6461.682243 |          0.222857 |                                 0.222857 |                  0.072897 |
+| 6461.682243 |           6461.682243     |          0.222857   |                                 0.222857  |                  0.072897                 |
 +-------------+---------------------------+---------------------+-------------------------------------------+-------------------
 ~~~
 
@@ -470,7 +470,7 @@ ORDER BY avg_sal ASC;
 
 
 
-首先注意一个执行顺序：1、FROM  2、WHERE  3、SELECT   4、GROUP BY   5、ORDER BY
+首先注意一个执行顺序：1、FROM  ON  2、WHERE    3、GROUP BY  4、HAVING   5、SELECT  6、ORDER BY  7、LIMIT 
 
 所以，分组后会出现一个记录所有记录总和的数据，该数据要参与ORDER BY 显然是不合理的
 
@@ -632,39 +632,53 @@ WHERE 和 HAVING 也不是互相排斥的，我们可以在一个查询里面同
 
 ### 4.1 查询的结构
 
-```mysql
-#方式1SQL92语法：
+方式1  SQL92语法：
+
+~~~sql
 SELECT 字段1，字段2，字段3，聚合函数(字段4)，聚合函数(字段5)，聚合函数(字段6)
 FROM 表1  ，表2  ，表3.......
 WHERE 多表的连接条件
-AND 不包含组函数的过滤条件
+AND 不包含聚合函数的过滤条件
 GROUP BY 字段1，字段2，字段3
-HAVING 包含组函数的过滤条件
+HAVING 包含聚合函数的过滤条件
 ORDER BY  ASC、DESC
 LIMIT 偏移量，个数
+~~~
 
-#方式2SQL99语法：
+
+
+方式2   SQL99语法：
+
+```mysql
 SELECT 字段1，字段2，字段3，聚合函数(字段4)，聚合函数(字段5)，聚合函数(字段6)
 FROM 表1  （LEFT、RIGHT）JOIN 表2 
 ON 多表的连接条件
 （LEFT、RIGHT）JOIN 表3
 ON 多表的连接条件
-WHERE 不包含组函数的过滤条件
-AND/OR 不包含组函数的过滤条件
-GROUP BY 字段1，字段2，字段3
-HAVING 包含组函数的过滤条件
-ORDER BY  ASC、DESC
-LIMIT  偏移量，个数
-
-#其中：
-#（1）from：从哪些表中筛选
-#（2）on：关联多表查询时，去除笛卡尔积
-#（3）where：从表中筛选的条件
-#（4）group by：分组依据
-#（5）having：在统计结果中再次筛选
-#（6）order by：排序
-#（7）limit：分页
+WHERE 不包含聚合函数的过滤条件
+AND/OR 不包含聚合函数的过滤条件
+GROUP BY 字段1,字段2,字段3
+HAVING 包含聚合函数的过滤条件
+ORDER BY  字段1 ASC/DESC
+LIMIT  偏移量,个数
 ```
+
+其中：
+（1）from：从哪些表中筛选
+
+（2）on：关联多表查询时，去除笛卡尔积
+
+（3）where：从表中筛选的条件
+
+（4）group by：分组依据
+
+（5）having：在统计结果中再次筛选
+
+（6）select：选择出需要的字段
+
+（6）order by：排序
+
+（7）limit：分页
 
 
 
@@ -674,13 +688,13 @@ LIMIT  偏移量，个数
 
 
 
-**1. 关键字的顺序是不能颠倒的：**
+**1.SELECT语句的书写顺序：**
 
 ```
 SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... ORDER BY ... LIMIT...
 ```
 
-
+ 关键字的顺序是不能颠倒的
 
 
 
@@ -694,7 +708,7 @@ FROM -> WHERE、ON -> GROUP BY -> HAVING -> SELECT 的字段 -> DISTINCT -> ORDE
 
 2、通过WHERE或是ON给出多表间的连接条件进行记录过滤
 
-3、判断是不是外连接，如是，则补充主表有记录而不满足多表间连接条件的记录
+3、判断是不是外连接，如是，则补充 主表有记录而不满足多表间连接条件的记录
 
 4、WHERE过滤数据
 
@@ -715,13 +729,14 @@ FROM -> WHERE、ON -> GROUP BY -> HAVING -> SELECT 的字段 -> DISTINCT -> ORDE
 比如你写了一个 SQL 语句，那么它的关键字顺序和执行顺序是下面这样的：
 
 ```mysql
-SELECT DISTINCT player_id, player_name, count(*) as num # 顺序 5
-FROM player JOIN team ON player.team_id = team.team_id # 顺序 1
-WHERE height > 1.80 # 顺序 2
-GROUP BY player.team_id # 顺序 3
-HAVING num > 2 # 顺序 4
-ORDER BY num DESC # 顺序 6
-LIMIT 2 # 顺序 7
+SELECT DISTINCT player_id, player_name, count(*) as num -- 顺序 6
+FROM player JOIN team            						-- 顺序 1
+ON player.team_id = team.team_id 						-- 顺序 2
+WHERE height > 1.80 			 						-- 顺序 3
+GROUP BY player.team_id 		 						-- 顺序 4
+HAVING num > 2 					 						-- 顺序 5
+ORDER BY num DESC 				 						-- 顺序 7
+LIMIT 2 						 						-- 顺序 8
 ```
 
 在 SELECT 语句执行这些步骤的时候，每个步骤都会产生一个`虚拟表`，然后将这个虚拟表传入下一个步骤中作为输入。需要注意的是，这些步骤隐含在 SQL 的执行过程中，对于我们来说是不可见的
@@ -762,7 +777,95 @@ SELECT 是先执行 FROM 这一步的。在这个阶段，如果是多张表联�
 
 
 
-# 合函数的课后练习
+
+
+# 小结
+
+## 理解聚合函数：
+
+按照某种计算方式将当前所掌握的所有记录中的数据计算出来
+
+
+
+## SQL执行顺序：
+
+1、FROM .....ON.........
+
+2、WHERE ....
+
+3、GROUP  BY ......
+
+4、HAVING .......
+
+5、SELECT ......
+
+6、ORDER BY ......
+
+7、LIMIT .......
+
+
+
+## 注意事项：
+
+聚合函数不能嵌套调用
+
+字符串、日期都不适用 AVG() 、SUM()
+
+
+
+## mysql中 count(*)，count(1)，count(列名)谁好
+
+如果使用的是InnoDB 存储引擎，则三者效率：COUNT(*) = COUNT(1)> COUNT(字段)
+
+如果使用MyIsam存储引擎则一样，因为MyIsam存储引擎不涉及事务，可以维护一个记录专门记录列数
+
+
+
+
+
+## 理解Group By
+
+按照某一列或某几列对一堆数据进行分组（相同的为一组）
+
+在SELECT列表中所有未包含在组函数中的列都应该包含在 GROUP BY子句中，否则这个数据可能不对
+
+GROUP BY中使用WITH ROLLUP `group by xxxx with rollup`   这会追加一行数据 会算出使用到聚合函数的列的总和
+
+
+
+
+
+
+
+## 理解 Having
+
+对已经分组的数据进行过滤（可以在其中使用聚合函数，而在where中不能使用聚合函数）
+
+在having中也可以作普通字段的过滤，不会这么做，效率低；因为where在多张虚拟表连接完成后就开始过滤掉许多无用的数据，而having则在分组后才会进行过滤，即是很多无用的数据进行了分组然后有被过滤掉了
+
+
+
+MySQL语句的执行顺序：
+
+----
+
+![image-20221231142542481](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212311425483.png)
+
+-----
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 聚合函数的课后练习
 
 
 

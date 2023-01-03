@@ -228,7 +228,7 @@ WHERE employee_id MOD 2 = 0;
 - 等号运算符（=）判断等号两边的值、字符串或表达式 **是否相等**，如果相等则返回1，不相等则返回0。
 - 在使用等号运算符时，遵循如下规则：
   - 如果等号	**两边的值**	、字符串或表达式	**都为字符串**，则MySQL会按照字符串进行比较，其比较的是 **每个字符串中字符的ANSI编码是否相等** 。
-  - **如果等号两边的值都是整数，则MySQL会按照整数来    **比较两个值的大小。
+  - **如果等号两边的值都是整数，则MySQL会按照整数来**比较两个值的大小。
   - 如果等号两边的值一个是整数，另一个是字符串，则MySQL会将   **字符串转化为数字** (隐式转换) 进行比较。
   - 如果等号两边的值、字符串或表达式中  **有一个为NULL**，则**比较结果为NULL**。
   
@@ -750,7 +750,7 @@ SELECT 'a' IN ('a','b','c'), 1 IN (2,3), NULL IN ('a','b'), 'a' IN (NULL,'a');
 
 
 ```mysql
--- in((set) 相当于使用过滤条件的or
+-- in(set) 相当于使用过滤条件的or
 
 #练习：查询部门为10,20,30部门的员工信息
 SELECT last_name,salary,department_id
@@ -1117,63 +1117,6 @@ mysql> SELECT 1 AND -1, 0 AND 1, 0 AND NULL, 1 AND NULL;
 +----------+---------+------------+------------+
 1 row in set (0.00 sec)
 
-+------------+------------+
-| last_name  | job_id     |
-+------------+------------+
-| King       | AD_PRES    |
-| Kochhar    | AD_VP      |
-| De Haan    | AD_VP      |
-| Greenberg  | FI_MGR     |
-| Faviet     | FI_ACCOUNT |
-| Chen       | FI_ACCOUNT |
-| Sciarra    | FI_ACCOUNT |
-| Urman      | FI_ACCOUNT |
-| Popp       | FI_ACCOUNT |
-| Raphaely   | PU_MAN     |
-| Khoo       | PU_CLERK   |
-| Baida      | PU_CLERK   |
-| Tobias     | PU_CLERK   |
-| Himuro     | PU_CLERK   |
-| Colmenares | PU_CLERK   |
-| Weiss      | ST_MAN     |
-| Fripp      | ST_MAN     |
-| Kaufling   | ST_MAN     |
-| Vollman    | ST_MAN     |
-| Mourgos    | ST_MAN     |
-| Russell    | SA_MAN     |
-| Partners   | SA_MAN     |
-| Errazuriz  | SA_MAN     |
-| Cambrault  | SA_MAN     |
-| Zlotkey    | SA_MAN     |
-| Taylor     | SH_CLERK   |
-| Fleaur     | SH_CLERK   |
-| Sullivan   | SH_CLERK   |
-| Geoni      | SH_CLERK   |
-| Sarchand   | SH_CLERK   |
-| Bull       | SH_CLERK   |
-| Dellinger  | SH_CLERK   |
-| Cabrio     | SH_CLERK   |
-| Chung      | SH_CLERK   |
-| Dilly      | SH_CLERK   |
-| Gates      | SH_CLERK   |
-| Perkins    | SH_CLERK   |
-| Bell       | SH_CLERK   |
-| Everett    | SH_CLERK   |
-| McCain     | SH_CLERK   |
-| Jones      | SH_CLERK   |
-| Walsh      | SH_CLERK   |
-| Feeney     | SH_CLERK   |
-| OConnell   | SH_CLERK   |
-| Grant      | SH_CLERK   |
-| Whalen     | AD_ASST    |
-| Hartstein  | MK_MAN     |
-| Fay        | MK_REP     |
-| Mavris     | HR_REP     |
-| Baer       | PR_REP     |
-| Higgins    | AC_MGR     |
-| Gietz      | AC_ACCOUNT |
-+------------+------------+
-52 rows in set (0.00 sec)
 ```
 
 
@@ -1204,12 +1147,12 @@ WHERE department_id = 50 AND salary > 6000;
 
 
 
-
-
-
-
 **3．逻辑或运算符**
-逻辑或（OR或||）运算符是当给定的值都不为NULL，并且任何一个值为非0值时，则返回1，否则返回0；当一个值为NULL，并且另一个值为非0值时，返回1，否则返回NULL；当两个值都为NULL时，返回NULL。
+逻辑或（OR或||）运算符是当给定的值都不为NULL，并且任何一个值为非0值时，则返回1，否则返回0；
+
+当一个值为NULL，并且另一个值为非0值时，返回1，否则返回NULL；
+
+当两个值都为NULL时，返回NULL。
 
 ```mysql
 mysql> SELECT 1 OR -1, 1 OR 0, 1 OR NULL, 0 || NULL, NULL || NULL;     
@@ -1403,7 +1346,7 @@ mysql> SELECT 1 XOR -1, 1 XOR 0, 0 XOR 0, 1 XOR NULL, 1 XOR 1 XOR 1, 0 XOR 0 XOR
 +----------+---------+---------+------------+---------------+---------------+
 1 row in set (0.00 sec)
 
-# 只能是1 和 0 玩
+# 只能是1 和 0 玩 非零就是一
 ```
 
 

@@ -25,7 +25,7 @@ index_img: /images/mysql.png
 - 使用 ORDER BY 子句排序
   - **ASC（ascend）: 升序**
   - **DESC（descend）:降序**
-- **ORDER BY 子句在SELECT语句的结尾**
+- **ORDER BY 子句在SELECT语句的结尾**【sql执行顺序】
 
 <!-- more -->
 

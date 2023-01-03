@@ -3490,3 +3490,22 @@ git config --global http.proxy 127.0.0.1:10810 为全局的 git 项目都设置�
 git config --local http.proxy 127.0.0.1:10810 为某个 git 项目单独设置代理
 ~~~
 
+
+
+
+
+
+
+## 首次推送时，拒绝
+
+----
+
+![image-20221216232103931](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/2022/8/27202212162321852.png)
+
+-----
+
+
+
+强行推送
+
+**git push -u -f origin master**

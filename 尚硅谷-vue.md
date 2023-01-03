@@ -13243,9 +13243,9 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 # 第6章:vue-router
 
-## 理解
+## 1. 理解
 
-1.vue-router 是 vue的一个插件库,专门用来实现SPA应用
+1.vue-router 是 vue的一个插件库,专门用来实现SPA【单页面应用】
 
 2.路由(route)就是 组key-value的对应关系
 
@@ -13271,19 +13271,19 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
-## 路由分类
+## 2. 路由分类
 
 1.后端路由:
 
-1)理解: value 是function,用于处理客户端提交的请求
+1)理解: 键是uri路径，值是一个servlet 
 
-2)工作过程:服务器接收到一个请求时,根据请求路径找到匹配的函数来处理请求,返回响应数据
+2)工作过程:服务器接收到一个请求时,根据请求路径找到匹配servlet来处理请求,返回响应数据
 
 
 
 2.前端路由:
 
-1) 理解: value是component,用于展示页面内容
+1) 理解: 键是一个路径，值是组件,用于展示页面内容
 
 2) 工作过程:当浏览器的路径改变时,对应的组件就会显示
 
@@ -13291,7 +13291,7 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
-## 路由的作用：
+## 3. 路由的作用：
 
 1.完成 SPA (single page web application)应用 **单页面应用**
 
@@ -13305,11 +13305,7 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 
 
 
-## 基本路由
-
-
-
-
+## 4. 基本路由
 
 使用的是脚手架2的话，对应的vueRouter版本为2
 
@@ -13320,7 +13316,6 @@ mapAcions与mapMutations使用时，若需要传递参数需要：在模板中�
 在main.js中
 
 ~~~js
-import VueRouter from 'vue-router'
 //引入路由器
 import router from '../router/index.js'
 
@@ -13362,15 +13357,11 @@ export default new VueRouter({
 });
 ~~~~
 
-
-
-看到：`/#/` 说明路由器已经在工作了
+>  看到：`/#/` 说明路由器已经在工作了
 
 
 
 使用标签 `<router-link to:'/about' active-class='active'>`代替a标签 实现 路由跳转  (active-class可配置高亮样式)
-
-
 
 使用` <router-vue></router-view>`指定路由组件呈现位置
 
@@ -13378,33 +13369,23 @@ export default new VueRouter({
 
 
 
-
-
-
-
-
-
-## 几个注意点
+## 5. 几个注意点
 
 一般在文件夹`page`中 存放路由组件，在components文件夹中使用非路由组件
 
 不同组件中会有一个属性 `$route` 对应着该组件的路由规则
 
-不同组件中会有一个属性 `$router` 对应着全局的路由器 	 
+不同组件中会有一个属性 `$router` 对应着 **全局的路由器** 	 
 
 路由切换后, “隐藏” 了的路由组件,默认是被销毁掉的,需要的时候再去挂载
 
 
 
-
-
-
-
-## 嵌套路由（多级路由）
-
-router/index.js
+## 6. 嵌套路由（多级路由）
 
 配置路由规则,使用children配置项:
+
+router/index.js
 
 ~~~~js
 import VueRouter from 'vue-router'
@@ -13425,7 +13406,7 @@ export default new VueRouter({
             path:'/home',
             component:Home,
             children:[
-                //子路由的路径不需要/
+                //子路由的路径不需要 / 开头
                 {
                     path:'news',
                     component:News
@@ -13444,196 +13425,167 @@ export default new VueRouter({
 
 `<router-link to='/home/news'>News</router-link>`
 
+## 7. 路由传参
 
+### query传参 （显示参数）
 
+**声明式**：
 
+需要进行路由跳转的地方：
 
-## 路由传参
+~~~vue
+ <router-link :to="{name:'Child',query:{id:1}}">跳转到子路由</router-link>
+~~~
 
-
-
-跳转路由的按钮：
-
-### query传参 
-
-
-
-router/index.js
+路由书写方式：
 
 ~~~js
-import VueRouter from 'vue-router'
-//引入组件
-import About from '../pages/About'
-import Home from '../pages/Home'
-import News from '../pages/News'
-import Message from '../pages/Message'
-import Detail from '../pages/Detail'
-
-
-//创建并暴露一个路由器
-export default new VueRouter({
-    routes:[
-        {
-            path:'/about',
-            component:About
-        },
-        {
-            path:'/home',
-            component:Home,
-            children:[
-                //子路由的路径不需要/
-                {
-                    path:'news',
-                    component:News
-                },
-                {
-                    path:'message',
-                    component:Message,
-                    children:[
-                        {
-                            path:'detail',
-                            component:Detail
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-});
+{
+    path: '/child,
+    name: 'Child',
+    component: Child
+   }
 ~~~
 
 
 
-~~~html
-<!--字符串写法 模板字符串-->
-<router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`"></router-link>
 
 
+**编程式：**
 
+需要进行路由跳转的地方：
 
-<!--对象写法 -->
-<router-link :to="{
-                  path:'/home/message/detail'，
-                  query:{
-                  	  id:m.id,
-                  	  title:m.title
-                    }
-                  }">
-</router-link>
-~~~
+~~~~js
+  this.$router.push({
+     name:'Child',
+     query:{
+      id:1
+     }
+  });
+~~~~
 
-路由组件接收参数：
-
-Detail.vue
-
-~~~html
-<template>
-    <ul>
-        <li>id：{{$route.query.id}}</li>   
-        <li>title：{{$route.query.title}}</li>    
-    </ul>
-</template>
-
-
-
-<script>
-export default{
-    name:'Detail',
-    
-}
-</script>
-~~~
-
-
-
-### params参数
-
-router/index.js
+路由书写方式：
 
 ~~~js
-import VueRouter from 'vue-router'
-//引入组件
-import About from '../pages/About'
-import Home from '../pages/Home'
-import News from '../pages/News'
-import Message from '../pages/Message'
-import Detail from '../pages/Detail'
-
-
-//创建并暴露一个路由器
-export default new VueRouter({
-    routes:[
-        {
-            path:'/about',
-            component:About
-        },
-        {
-            path:'/home',
-            component:Home,
-            children:[
-                //子路由的路径不需要/
-                {
-                    path:'news',
-                    component:News
-                },
-                {
-                    path:'message',
-                    component:Message,
-                    children:[
-                        {
-                            path:'detail/:id/:title',
-                            component:Detail
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-});
+{
+    path: '/child,
+    name: 'Child',
+    component: Child
+   }
 ~~~
 
 
 
-Detail.vue
-
-~~~html
-<template>
-    <ul>
-        <li>id：{{$route.params.id}}</li>   
-        <li>title：{{$route.params.title}}</li>    
-    </ul>
-</template>
+在路由组件中**接收:** `this.$route.query.id`
 
 
 
-<script>
-export default{
-    name:'Detail',
-    
+### params传参（不显示参数）
+
+**声明式：**
+
+需要路由跳转的地方：
+
+~~~~vue
+<router-link :to="{name:'Child',params:{id:1}}">跳转到子路由</router-link>
+~~~~
+
+路由书写方式：
+
+~~~~js
+{
+    path: '/child,
+    name: 'Child',
+    component: Child
 }
-</script>
+~~~~
+
+在路由组件中**接收:** `this.$route.params.id`
+
+
+
+
+
+**编程式：**
+
+需要进行路由跳转的地方：
+
+~~~js
+this.$router.push({
+     name:'Child',
+     params:{
+      id:1
+     }
+ });
+~~~
+
+路由书写方式：
+
+~~~~js
+{
+    path: '/child,
+    name: 'Child',
+    component: Child
+}
+~~~~
+
+在路由组件中**接收:** `this.$route.params.id`
+
+
+
+### `params` 传参（显示参数）
+
+**声明式：**
+
+需要进行路由跳转的地方：
+
+~~~vue
+<router-link :to="/child/1"> 跳转到子路由 </router-link>
 ~~~
 
 
 
-~~~html
-<!--字符串写法 模板字符串-->
-<router-link :to="`/home/message/detail/${m.id}/${m.title}`"></router-link>
+路由申明：
 
-
-
-
-<!--对象写法 -->
-<!--params不能使用path只能使用name path:'/home/message/detail'，-->
-<router-link :to="{
-                 name:'xiangqing'
-                  query:{
-                  	  id:m.id,
-                  	  title:m.title
-                    }
-                  }">
-</router-link>
+~~~js
+{
+    path: '/child/:id',
+    component: Child
+}
 ~~~
+
+在组件中**接收:** `this.$route.params.id`
+
+
+
+
+
+
+
+**编程式：**
+
+需要进行路由跳转的地方：
+
+~~~js
+ this.$router.push({
+     path:'/child/${id}',
+  });
+~~~
+
+
+
+路由申明：
+
+~~~js
+{
+    path: '/child/:id',
+    component: Child
+}
+~~~
+
+在组件中**接收:** `this.$route.params.id`
+
+
 
 特别注意:路由携带params参数时,若使用to的 对象写法 ,则不能使用path配置项,必须使用name配置!
 
@@ -13643,52 +13595,7 @@ export default{
 
 
 
-## 命名路由
-
-~~~js
-import VueRouter from 'vue-router'
-//引入组件
-import About from '../pages/About'
-import Home from '../pages/Home'
-import News from '../pages/News'
-import Message from '../pages/Message'
-import Detail from '../pages/Detail'
-
-
-//创建并暴露一个路由器
-export default new VueRouter({
-    routes:[
-        {
-            path:'/about',
-            component:About
-        },
-        {
-            path:'/home',
-            component:Home,
-            children:[
-                //子路由的路径不需要/
-                {
-                    path:'news',
-                    component:News
-                },
-                {
-                    path:'message',
-                    component:Message,
-                    children:[
-                        {
-                            name:'xiangqing'
-                            path:'detail',
-                            component:Detail
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-});
-~~~
-
-
+## 8. 命名路由
 
 ~~~html
 <!--简化前-->
@@ -13712,15 +13619,11 @@ export default new VueRouter({
 </router-link>
 ~~~
 
-
-
-
-
 作用:可以简化路由的跳转(多级路由)
 
 
 
-## 路由的props配置
+## 9. 路由的props配置（了解）
 
 ### props的第一种写法
 
@@ -13816,18 +13719,9 @@ import Detail from '../pages/Detail'
 export default new VueRouter({
     routes:[
         {
-            path:'/about',
-            component:About
-        },
-        {
             path:'/home',
             component:Home,
             children:[
-                //子路由的路径不需要/
-                {
-                    path:'news',
-                    component:News
-                },
                 {
                     path:'message',
                     component:Message,
@@ -13894,18 +13788,9 @@ import Detail from '../pages/Detail'
 export default new VueRouter({
     routes:[
         {
-            path:'/about',
-            component:About
-        },
-        {
             path:'/home',
             component:Home,
             children:[
-                //子路由的路径不需要/
-                {
-                    path:'news',
-                    component:News
-                },
                 {
                     path:'message',
                     component:Message,
@@ -13926,7 +13811,7 @@ export default new VueRouter({
                 
                   			解构2
                               props({query:{id,title}}){
-                                return {id:query.id,title:query.title}
+                                return {id:id,title:title}
                             }
                             -->
                             
@@ -13973,7 +13858,7 @@ props作用:让路由组件更方便的收到参数
 
 
 
- ## `<router-link> `的replace属性
+ ## 10. `<router-link> `的replace属性
 
 作用:控制路由跳转时操作浏览器历史记录的模式
 
@@ -13989,3 +13874,29 @@ props作用:让路由组件更方便的收到参数
 
 
 
+相关 API： 
+
+1. `this.$router.push(path)`: 相当于点击路由链接(可以返回到当前路由界面) 
+2.  `this.$router.replace(path)`: 用新路由替换当前路由(不可以返回到当前路由界面) 
+3.  `this.$router.back()`: 请求(返回)上一个记录路由 
+4.  `this.$router.go(-1)`: 请求(返回)上一个记录路由 
+5. `this.$router.go(1)`: 请求下一个记录路由
+
+
+
+
+
+# 第 7 章：Vue UI 组件库
+
+## 7.1 移动端常用 UI 组件库 
+
+1. Vant https://youzan.github.io/vant 
+2. Cube UI https://didi.github.io/cube-ui 
+3. Mint UI http://mint-ui.github.io 
+
+
+
+## 7.2 PC 端常用 UI 组件库 
+
+1. Element UI https://element.eleme.cn 
+2.  IView UI https://www.iviewui.co

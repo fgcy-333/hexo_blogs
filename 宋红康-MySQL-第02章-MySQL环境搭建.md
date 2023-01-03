@@ -819,7 +819,7 @@ mysql -h localhost -P 3306 -u root -proot123  # 这里我设置的root用户的�
 
 注意：
 
-（1）**-p与密码之间不能有空格，其他参数名与参数值之间可以有空格也可以没有空格**
+（1）-p与密码之间不能有空格，其他参数名与参数值之间可以有空格也可以没有空格
 
 如：
 
@@ -1494,7 +1494,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193635459.png" alt="image-20220621193635459" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193635459.png" alt="image-20220621193635459" style="zoom: 33%;" />
 
 ---
 
@@ -1504,7 +1504,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193718002.png" alt="image-20220621193718002" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193718002.png" alt="image-20220621193718002" style="zoom: 33%;" />
 
 ---
 
@@ -1514,7 +1514,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193821419.png" alt="image-20220621193821419" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193821419.png" alt="image-20220621193821419" style="zoom: 33%;" />
 
 ---
 
@@ -1524,7 +1524,7 @@ FLUSH PRIVILEGES;
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193848282.png" alt="image-20220621193848282" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/image-20220621193848282.png" alt="image-20220621193848282" style="zoom: 33%;" />
 
 ---
 
@@ -1667,7 +1667,7 @@ ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname
 
 ---
 
-![1554912957353](https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554912957353.png)
+<img src="https://cdn.jsdelivr.net/gh/fgcy-333/gitnote-images/1554912957353.png" alt="1554912957353" style="zoom:50%;" />
 
 ---
 
@@ -1844,8 +1844,8 @@ SQL: MySQL数据库服务器中安装了MySQL DBMS,使用MySQL DBMS 来管理和
 
 ### 5.表与表的记录之间存在哪些关联关系？
 
-ORM思想（了解）
-表与表的记录之间的关系：一对一关系、一对多关系、多对多关系、自关联 （了解）
+ORM思想  表：类    一条记录：一个对象
+表与表的记录之间的关系：一对一关系、一对多关系、多对多关系、自关联 
 
 
 

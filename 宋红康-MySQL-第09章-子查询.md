@@ -909,7 +909,7 @@ WHERE  2 <= (SELECT COUNT(*)
 
 小结论：
 
-==1、在SELECT 中，除了GROUP BY 和 LIMIT 之外；其他位置均可使用子查询；==
+1、在SELECT 中，除了GROUP BY 和 LIMIT 之外；其他位置均可使用子查询
 
 2、只要发现子查询中出现主查询中的字段就是相关子查询
 
@@ -943,7 +943,7 @@ WHERE  2 <= (SELECT COUNT(*)
 
 
 
-方式一：相关子查询
+方式一：相关子查询 EXISTS
 
 ```sql
 SELECT employee_id, last_name, job_id, department_id
@@ -991,7 +991,7 @@ WHERE e1.employee_id = e2.manager_id;
 
 
 
- 方式三：EXISTS
+ 方式三：IN
 
 ```sql
 SELECT employee_id,last_name,job_id,department_id
@@ -1123,13 +1123,17 @@ WHERE employee_id in
 
 **解答：**
 
-```mysql
+```SQL
 #方式1：自连接
 SELECT e2.last_name,e2.salary
 FROM employees e1,employees e2
 WHERE e1.last_name = 'Abel'
 AND e1.`salary` < e2.`salary`
 ```
+
+> 先是自连接，然后通过过滤获取其中一张表中的记录，再通过这条记录非等值链接自己
+
+
 
 ```mysql
 #方式2：子查询
@@ -1915,6 +1919,13 @@ WHERE  EXISTS (
 
 方式三：自连接
 
+~~~sql
+SELECT e2.last_name,e2.salary 
+FROM employees e1,employees e2
+WHERE e1.manager_id IS NOT NULL
+AND e2.employee_id=e1.manager_id
+~~~
+
 
 
 ## 13. 各个部门中 最高工资中最低的那个部门的 最低工资是多少?
@@ -1966,7 +1977,7 @@ WHERE e.department_id=t_e.department_id;
 
 ~~~mysql
 -- 平均工资最高的部门id
-SELECT department_id ,MAX(salary) max_salary
+SELECT department_id ,AVG(salary) max_salary
 FROM employees
 GROUP BY department_id
 ORDER BY max_salary DESC
@@ -1983,7 +1994,7 @@ LIMIT 1;
 SELECT DISTINCT e.manager_id 
 FROM 
 employees e,(
-                        SELECT department_id ,MAX(salary) max_salary
+                        SELECT department_id ,AVG(salary) max_salary
                         FROM employees
                         GROUP BY department_id
                         ORDER BY max_salary DESC
@@ -2153,9 +2164,9 @@ WHERE NOT EXISTS(
 SELECT employee_id, last_name, hire_date, salary
 FROM employees
 WHERE manager_id IN (
-SELECT employee_id
-FROM employees
-WHERE last_name = 'De Haan'
+            SELECT employee_id
+            FROM employees
+            WHERE last_name = 'De Haan'
 );
 
 +-------------+-----------+------------+---------+
@@ -2207,14 +2218,14 @@ WHERE salary > (
 
 
 
-方式二：
+方式二：多表链接
 
 ~~~MYSQL
 SELECT employee_id,last_name,salary
 FROM employees e1,
-(SELECT department_id,AVG(salary) avg_sal
-FROM employees e2 GROUP BY department_id
-) dept_avg_sal
+                    (SELECT department_id,AVG(salary) avg_sal
+                    FROM employees e2 GROUP BY department_id
+                    ) dept_avg_sal
 WHERE e1.`department_id` = dept_avg_sal.department_id
 AND e1.`salary` > dept_avg_sal.avg_sal;
 
